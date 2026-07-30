@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail" data-bg-color="#f6f7f9">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f6f7f9"/><rect x="60" y="60" width="24" height="24" rx="5" fill="oklch(0.52 0.15 258)"/><text x="60" y="118" font-family="monospace" font-size="16" fill="#151a21">ML Platform</text><text x="60" y="138" font-family="monospace" font-size="16" fill="#151a21">Hub</text></svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "IBM Plex Sans", Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: oklch(0.52 0.15 258); text-decoration: none; }
+  a:hover { color: oklch(0.42 0.15 258); text-decoration: underline; }
+  input, select, textarea, button { font-family: inherit; font-size: inherit; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #d3d8e0; border-radius: 6px; border: 3px solid transparent; background-clip: content-box; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes slidein { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+</style>
+</helmet>
+<div style="display: flex; height: 100vh; overflow: hidden; background: #f6f7f9; color: #151a21; font-size: 13.5px; line-height: 1.5;">
+
+  <div style="width: 246px; flex: 0 0 246px; background: #fbfbfc; color: #4b5563; display: flex; flex-direction: column; overflow: hidden; border-right: 1px solid #e4e7ec;">
+    <div style="padding: 20px 18px 16px; border-bottom: 1px solid #e9ecf1;">
+      <div style="display: flex; align-items: center; gap: 9px;">
+        <div style="width: 22px; height: 22px; border-radius: 5px; background: oklch(0.52 0.15 258); flex: 0 0 22px;"></div>
+        <div style="font-size: 14.5px; font-weight: 600; color: #151a21; letter-spacing: -0.01em;">ML Platform Hub</div>
+      </div>
+      <div style="margin-top: 8px; font-size: 11.5px; color: #8a93a3; line-height: 1.45;">Build, train, deploy, and operate machine-learning models through one self-service platform.</div>
+    </div>
+    <div style="flex: 1; overflow-y: auto; padding: 10px 8px;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="13">
+        <div onClick="{{ item.onClick }}" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 10px; margin-bottom: 1px; border-radius: 6px; cursor: pointer; background: {{ item.bg }}; color: {{ item.fg }}; font-weight: {{ item.weight }};" style-hover="background: #eef1f5; color: #151a21;">
+          <span>{{ item.label }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #9aa3b2;">{{ item.badge }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border-top: 1px solid #e9ecf1; padding: 12px 14px;">
+      <div style="font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #98a1af; margin-bottom: 6px;">Team</div>
+      <div onClick="{{ cycleTeam }}" style="display: flex; align-items: center; justify-content: space-between; padding: 7px 9px; border: 1px solid #e0e4ea; border-radius: 6px; cursor: pointer; background: #fff;" style-hover="border-color: oklch(0.62 0.16 258);">
+        <span style="font-size: 12.5px; color: #151a21;">{{ team }}</span>
+        <span style="color: #98a1af; font-size: 10px;">SWITCH</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 9px; margin-top: 12px;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: oklch(0.52 0.15 258); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 600;">AR</div>
+        <div style="min-width: 0;">
+          <div style="font-size: 12.5px; color: #151a21; font-weight: 500;">Ana Reyes</div>
+          <div style="font-size: 11px; color: #8a93a3;">ML Engineer · Approver</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+    <div style="height: 56px; flex: 0 0 56px; background: #fff; border-bottom: 1px solid #e4e7ec; display: flex; align-items: center; gap: 16px; padding: 0 22px;">
+      <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #6b7484; min-width: 0;">
+        <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="2">
+          <span onClick="{{ c.onClick }}" style="cursor: {{ c.cursor }}; color: {{ c.color }}; white-space: nowrap;">{{ c.label }}</span>
+          <span style="color: #c3cad4;">{{ c.sep }}</span>
+        </sc-for>
+      </div>
+      <div style="flex: 1;"></div>
+      <input placeholder="Search projects, datasets, models…" style="width: 260px; height: 32px; padding: 0 11px; border: 1px solid #e0e4ea; border-radius: 6px; background: #f8f9fb; color: #151a21; outline: none; font-size: 12.5px;" style-focus="border-color: oklch(0.62 0.16 258); background: #fff;" />
+      <div style="display: flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid #f0d9b5; background: #fdf7ec; border-radius: 6px; font-size: 12px; color: #8a6212;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #d99616; animation: pulse 2s infinite;"></span>
+        <span>{{ alertCount }} active alerts</span>
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 24px 26px 60px;">
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 18px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Platform overview</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Self-service state of the ML platform · {{ team }} · 30 July 2026</div>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <sc-for list="{{ quickActions }}" as="q" hint-placeholder-count="5">
+        <div onClick="{{ q.onClick }}" style="padding: 8px 13px; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500; background: {{ q.primary }}; color: {{ q.fg }}; border: 1px solid {{ q.bd }}; white-space: nowrap;" style-hover="filter: brightness(0.96);">{{ q.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px;">
+    <sc-for list="{{ summary }}" as="c" hint-placeholder-count="6">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 15px 16px;">
+        <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ c.k }}</div>
+        <div style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 6px 0 2px;">{{ c.v }}</div>
+        <div style="font-size: 12px; color: {{ c.color }};">{{ c.d }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; margin-bottom: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px 18px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+        <div style="font-weight: 600;">{{ utilChart.title }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px;">{{ utilChart.value }}</div>
+      </div>
+      <svg viewBox="0 0 280 70" preserveAspectRatio="none" style="width: 100%; height: 92px; display: block;">
+        <path d="{{ utilChart.a }}" fill="oklch(0.62 0.16 258 / 0.12)"></path>
+        <path d="{{ utilChart.d }}" fill="none" stroke="oklch(0.62 0.16 258)" stroke-width="1.6" vector-effect="non-scaling-stroke"></path>
+      </svg>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px 18px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+        <div style="font-weight: 600;">{{ costChart.title }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px;">{{ costChart.value }}</div>
+      </div>
+      <svg viewBox="0 0 280 70" preserveAspectRatio="none" style="width: 100%; height: 92px; display: block;">
+        <path d="{{ costChart.a }}" fill="oklch(0.62 0.14 152 / 0.12)"></path>
+        <path d="{{ costChart.d }}" fill="none" stroke="oklch(0.62 0.14 152)" stroke-width="1.6" vector-effect="non-scaling-stroke"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Recent activity</div>
+      <sc-for list="{{ activity }}" as="a" hint-placeholder-count="6">
+        <div style="display: flex; gap: 12px; padding: 11px 18px; border-bottom: 1px solid #f3f5f8; align-items: flex-start;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ a.tone }}; margin-top: 6px; flex: 0 0 7px;"></span>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 500;">{{ a.k }}</div>
+            <div style="color: #6b7484; font-size: 12.5px;">{{ a.d }}</div>
+          </div>
+          <div style="color: #98a1af; font-size: 12px; white-space: nowrap;">{{ a.t }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Platform health</div>
+      <sc-for list="{{ health }}" as="h" hint-placeholder-count="5">
+        <div style="display: flex; justify-content: space-between; gap: 14px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8;">
+          <div>
+            <div style="font-weight: 500;">{{ h.k }}</div>
+            <div style="color: #6b7484; font-size: 12.5px;">{{ h.d }}</div>
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; white-space: nowrap;">{{ h.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProjects }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Projects</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Every project owns a namespace, quota, repository and registry entry.</div>
+    </div>
+    <div onClick="{{ goNewProject }}" style="padding: 8px 13px; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500; background: oklch(0.52 0.15 258); color: #fff;" style-hover="filter: brightness(0.94);">Create Project</div>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 0.7fr 0.8fr 1.4fr 1fr; gap: 12px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Project</div><div>Team</div><div>Workload</div><div>Models</div><div>Endpoints</div><div>Spend / budget</div><div>Status</div>
+    </div>
+    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+      <div onClick="{{ p.onClick }}" style="display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 0.7fr 0.8fr 1.4fr 1fr; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #f3f5f8; cursor: pointer; align-items: center;" style-hover="background: #f8fafd;">
+        <div style="font-weight: 500;">{{ p.name }}</div>
+        <div style="color: #4b5563;">{{ p.team }}</div>
+        <div style="color: #4b5563;">{{ p.type }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.models }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.endpoints }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ p.spend }} / {{ p.budget }}</div>
+        <div><span style="display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500; color: {{ p.color }}; border: 1px solid {{ p.color }};">{{ p.status }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isNewProject }}">
+<div style="max-width: 940px;">
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Create ML project</h1>
+  <div style="color: #6b7484; margin-bottom: 20px;">The platform provisions infrastructure, identity, quota and GitOps wiring for you.</div>
+
+  <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+    <sc-for list="{{ wizSteps }}" as="s" hint-placeholder-count="5">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fff; border: 1px solid #e4e7ec; border-radius: 6px;">
+        <span style="width: 20px; height: 20px; border-radius: 50%; background: {{ s.bg }}; color: {{ s.fg }}; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">{{ s.n }}</span>
+        <span style="font-size: 12.5px; color: {{ s.labelColor }}; font-weight: {{ s.weight }};">{{ s.label }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ created }}">
+    <div style="background: #fff; border: 1px solid #cde9d7; border-radius: 8px; padding: 26px 28px;">
+      <div style="display: inline-block; padding: 3px 10px; border-radius: 20px; background: #f0f9f3; color: oklch(0.5 0.13 152); font-size: 11.5px; font-weight: 600; margin-bottom: 10px;">PROJECT CREATED</div>
+      <div style="font-size: 19px; font-weight: 600;">{{ f.name }} is ready</div>
+      <div style="color: #6b7484; margin-top: 4px;">Namespace, quota, service account, storage, registry entry and GitOps directory provisioned in 41 seconds.</div>
+      <div style="display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;">
+        <div onClick="{{ goProject }}" style="padding: 9px 14px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 12.5px;">Open project dashboard</div>
+        <div onClick="{{ goWorkspaces }}" style="padding: 9px 14px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Open workspace</div>
+        <div onClick="{{ goNewJob }}" style="padding: 9px 14px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Start first training run</div>
+        <div onClick="{{ goDatasets }}" style="padding: 9px 14px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Register a dataset</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ notCreated }}">
+  <sc-if value="{{ isW1 }}">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 22px 24px;">
+      <div style="font-weight: 600; margin-bottom: 16px;">Project information</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px;">
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Project name</span><input defaultValue="Fraud Detection Platform v2" onChange="{{ setName }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" style-focus="border-color: oklch(0.62 0.16 258);" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Owning team</span><input defaultValue="Risk Intelligence" onChange="{{ setTeam }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" style-focus="border-color: oklch(0.62 0.16 258);" /></label>
+        <label style="display: block; grid-column: span 2;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Description</span><textarea onChange="{{ setDesc }}" defaultValue="Real-time card-not-present fraud scoring for the payments gateway." style="width: 100%; height: 64px; padding: 8px 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; resize: vertical;" style-focus="border-color: oklch(0.62 0.16 258);"></textarea></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Technical owner</span><input defaultValue="Ana Reyes" onChange="{{ setOwner }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Cost center</span><input defaultValue="CC-4821" onChange="{{ setCc }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block; grid-column: span 2;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Business use case</span><input defaultValue="Reduce chargeback loss by 18% at &lt;60ms p95" onChange="{{ setUseCase }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isW2 }}">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 22px 24px;">
+      <div style="font-weight: 600; margin-bottom: 4px;">Workload type</div>
+      <div style="color: #6b7484; font-size: 12.5px; margin-bottom: 16px;">Determines default compute profiles, node pools and admission policy.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <sc-for list="{{ workloads }}" as="w" hint-placeholder-count="6">
+          <div onClick="{{ w.onClick }}" style="border: 1px solid {{ w.bd }}; background: {{ w.bg }}; border-radius: 7px; padding: 13px 15px; cursor: pointer;" style-hover="border-color: oklch(0.62 0.16 258);">
+            <div style="font-weight: 500;">{{ w.label }}</div>
+            <div style="color: #6b7484; font-size: 12.5px; margin-top: 2px;">{{ w.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isW3 }}">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 22px 24px;">
+      <div style="font-weight: 600; margin-bottom: 4px;">Data classification</div>
+      <div style="color: #6b7484; font-size: 12.5px; margin-bottom: 16px;">Drives encryption, node isolation, egress rules and approval requirements.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <sc-for list="{{ classes }}" as="c" hint-placeholder-count="4">
+          <div onClick="{{ c.onClick }}" style="border: 1px solid {{ c.bd }}; background: {{ c.bg }}; border-radius: 7px; padding: 13px 15px; cursor: pointer;" style-hover="border-color: oklch(0.62 0.16 258);">
+            <div style="font-weight: 500;">{{ c.label }}</div>
+            <div style="color: #6b7484; font-size: 12.5px; margin-top: 2px;">{{ c.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isW4 }}">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 22px 24px;">
+      <div style="font-weight: 600; margin-bottom: 16px;">Resource requirements</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px;">
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">CPU profile</span>
+          <select onChange="{{ setCpu }}" style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;">
+            <option>CPU Standard (8 vCPU / 32 GiB)</option><option>CPU Large (32 vCPU / 128 GiB)</option><option>Memory Optimized (16 vCPU / 256 GiB)</option>
+          </select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">GPU profile</span>
+          <select onChange="{{ setGpu }}" style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;">
+            <option>1 × NVIDIA A100 40GB</option><option>4 × NVIDIA A100 80GB</option><option>8 × NVIDIA H100 80GB</option><option>MIG 1g.10gb</option><option>None</option>
+          </select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Storage size</span><input defaultValue="2 TiB" onChange="{{ setStorage }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Expected training frequency</span>
+          <select onChange="{{ setFreq }}" style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>Daily</option><option>Weekly</option><option>On drift trigger</option><option>Ad hoc</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Expected inference traffic</span><input defaultValue="1.2k req/s peak" onChange="{{ setTraffic }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Latency SLO</span><input defaultValue="60 ms p95" onChange="{{ setSlo }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Monthly budget (USD)</span><input defaultValue="18,000" onChange="{{ setBudget }}" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isW5 }}">
+    <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 14px;">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 20px 22px;">
+        <div style="font-weight: 600; margin-bottom: 12px;">Your configuration</div>
+        <div style="display: grid; gap: 9px;">
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Name</span><span style="font-weight: 500; text-align: right;">{{ f.name }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Team</span><span style="text-align: right;">{{ f.team }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Owner</span><span style="text-align: right;">{{ f.owner }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Cost center</span><span style="text-align: right;">{{ f.cc }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Workload</span><span style="text-align: right;">{{ f.workload }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Classification</span><span style="text-align: right;">{{ f.classification }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">GPU profile</span><span style="text-align: right;">{{ f.gpu }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Storage</span><span style="text-align: right;">{{ f.storage }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Latency SLO</span><span style="text-align: right;">{{ f.slo }}</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 12px;"><span style="color: #6b7484;">Monthly budget</span><span style="text-align: right;">${{ f.budget }}</span></div>
+        </div>
+      </div>
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 20px 22px;">
+        <div style="font-weight: 600; margin-bottom: 4px;">Platform will create</div>
+        <div style="color: #6b7484; font-size: 12.5px; margin-bottom: 12px;">No tickets, no manual Kubernetes work.</div>
+        <sc-for list="{{ provisioned }}" as="p" hint-placeholder-count="9">
+          <div style="display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f3f5f8;">
+            <span style="color: oklch(0.55 0.13 152); font-size: 12px;">✓</span>
+            <span style="width: 150px; flex: 0 0 150px; color: #4b5563; font-size: 12.5px;">{{ p.k }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #151a21; word-break: break-all;">{{ p.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="display: flex; gap: 10px; margin-top: 16px;">
+    <div onClick="{{ wizBack }}" style="padding: 9px 15px; border: 1px solid #dfe3e9; background: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Back</div>
+    <sc-if value="{{ isW5 }}">
+      <div onClick="{{ wizCreate }}" style="padding: 9px 16px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 12.5px;">Create project</div>
+    </sc-if>
+    <div onClick="{{ wizNext }}" style="padding: 9px 16px; background: #151a21; color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 12.5px;">Continue</div>
+  </div>
+  </sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ isProject }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Fraud Detection Platform</h1>
+      <div style="margin-top: 4px; color: #6b7484;">ml-fraud-detection · eu-west-1 · Confidential (PCI)</div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <div onClick="{{ goNewJob }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Start Training</div>
+      <div onClick="{{ goWorkspaces }}" style="padding: 8px 13px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Open Workspace</div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 20px; border-bottom: 1px solid #e4e7ec; margin: 18px 0 18px;">
+    <sc-for list="{{ projTabs }}" as="t" hint-placeholder-count="8">
+      <div onClick="{{ t.onClick }}" style="padding: 9px 2px; cursor: pointer; border-bottom: 2px solid {{ t.bd }}; color: {{ t.color }}; font-weight: {{ t.weight }}; font-size: 13px;">{{ t.label }}</div>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 16px;">
+    <sc-for list="{{ projFacts }}" as="p" hint-placeholder-count="8">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 13px 15px;">
+        <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ p.k }}</div>
+        <div style="margin-top: 4px; font-weight: 500;">{{ p.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px;">
+    <div style="font-weight: 600; margin-bottom: 14px;">Model lifecycle</div>
+    <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px;">
+      <sc-for list="{{ lifecycle }}" as="l" hint-placeholder-count="8">
+        <div style="background: {{ l.bg }}; border: 1px solid {{ l.tone }}; border-radius: 7px; padding: 11px 12px;">
+          <div style="font-weight: 600; font-size: 12.5px;">{{ l.k }}</div>
+          <div style="font-size: 11.5px; color: {{ l.tone }}; margin-top: 3px; font-family: 'IBM Plex Mono', monospace;">{{ l.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 600;">Latest experiments</span>
+        <span onClick="{{ goExperiments }}" style="cursor: pointer; color: oklch(0.52 0.15 258); font-size: 12.5px;">Compare runs →</span>
+      </div>
+      <sc-for list="{{ runs }}" as="r" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 18px; border-bottom: 1px solid #f3f5f8;">
+          <div style="min-width: 0;">
+            <div style="font-weight: 500; font-size: 12.5px;">{{ r.name }}</div>
+            <div style="color: #6b7484; font-size: 11.5px; font-family: 'IBM Plex Mono', monospace;">{{ r.commit }} · dataset {{ r.ds }} · {{ r.time }}</div>
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; white-space: nowrap;">{{ r.auc }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-weight: 600;">Retraining pipelines</span>
+        <span onClick="{{ goPipelines }}" style="cursor: pointer; color: oklch(0.52 0.15 258); font-size: 12.5px;">All pipelines →</span>
+      </div>
+      <sc-for list="{{ pipelines }}" as="p" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 11px 18px; border-bottom: 1px solid #f3f5f8;">
+          <div>
+            <div style="font-weight: 500; font-size: 12.5px;">{{ p.k }}</div>
+            <div style="color: #6b7484; font-size: 11.5px;">{{ p.trigger }} · {{ p.last }}</div>
+          </div>
+          <span style="color: {{ p.tone }}; font-size: 12px; font-weight: 500; white-space: nowrap;">{{ p.status }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isWorkspaces }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Development workspaces</h1>
+  <div style="color: #6b7484; margin-bottom: 18px;">Jupyter and VS Code environments on managed CPU and GPU pools. Idle shutdown protects budget.</div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 13px 18px; margin-bottom: 14px;">
+    <div>
+      <div style="font-weight: 500;">Automatic idle shutdown</div>
+      <div style="color: #6b7484; font-size: 12.5px;">Stops GPU workspaces after 60 minutes without kernel activity.</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">60 min</span>
+      <div style="width: 40px; height: 22px; border-radius: 20px; background: oklch(0.62 0.14 152); padding: 3px; display: flex; justify-content: flex-end;"><span style="width: 16px; height: 16px; border-radius: 50%; background: #fff;"></span></div>
+    </div>
+  </div>
+
+  <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: #6b7484; margin: 0 0 10px;">Workspace profiles</div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 20px;">
+    <sc-for list="{{ wsProfiles }}" as="p" hint-placeholder-count="6">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 15px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <div style="font-weight: 600;">{{ p.k }}</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ p.cost }}</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; margin: 10px 0 12px; font-size: 12px; color: #4b5563;">
+          <div>CPU · {{ p.cpu }}</div><div>Memory · {{ p.mem }}</div>
+          <div>GPU · {{ p.gpu }}</div><div>Count · {{ p.n }}</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 11.5px; color: {{ p.tone }}; font-weight: 500;">{{ p.avail }}</span>
+          <span onClick="{{ p.start }}" style="padding: 6px 12px; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px;" style-hover="background: #f6f8fb;">Start</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: #6b7484; margin: 0 0 10px;">Active workspaces</div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1fr 1.5fr 1.6fr 0.8fr 0.8fr 0.7fr 1fr 1.2fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Owner</div><div>Project</div><div>Runtime</div><div>Age</div><div>Cost</div><div>Idle</div><div>Status</div><div></div>
+    </div>
+    <sc-for list="{{ wsActive }}" as="w" hint-placeholder-count="4">
+      <div style="display: grid; grid-template-columns: 1fr 1.5fr 1.6fr 0.8fr 0.8fr 0.7fr 1fr 1.2fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px;">
+        <div style="font-weight: 500;">{{ w.owner }}</div>
+        <div style="color: #4b5563;">{{ w.proj }}</div>
+        <div style="color: #4b5563;">{{ w.rt }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ w.age }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ w.cost }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ w.idle }}</div>
+        <div><span style="color: {{ w.tone }}; font-weight: 500;">{{ w.status }}</span></div>
+        <div style="display: flex; gap: 6px; justify-content: flex-end;">
+          <span style="padding: 5px 10px; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px;" style-hover="background: #f6f8fb;">Open</span>
+          <span onClick="{{ w.stop }}" style="padding: 5px 10px; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px;" style-hover="background: #f6f8fb;">Stop</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDatasets }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Dataset registry</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Versioned, profiled and access-controlled datasets available for training.</div>
+    </div>
+    <div onClick="{{ newVersion }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">New dataset version</div>
+  </div>
+  <div style="display: flex; gap: 8px; margin: 16px 0 12px;">
+    <input placeholder="Filter datasets…" style="width: 240px; height: 32px; padding: 0 11px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff; outline: none;" />
+    <select style="height: 32px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>All classifications</option><option>Internal</option><option>Confidential</option><option>Restricted</option></select>
+    <select style="height: 32px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>All quality states</option><option>Passed</option><option>Drift</option><option>Review</option></select>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.8fr 0.6fr 1.3fr 0.9fr 0.9fr 1.1fr 1.1fr 0.9fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Dataset</div><div>Version</div><div>Owner</div><div>Size</div><div>Records</div><div>Classification</div><div>Quality</div><div>Updated</div>
+    </div>
+    <sc-for list="{{ datasets }}" as="d" hint-placeholder-count="5">
+      <div onClick="{{ d.onClick }}" style="display: grid; grid-template-columns: 1.8fr 0.6fr 1.3fr 0.9fr 0.9fr 1.1fr 1.1fr 0.9fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; cursor: pointer; align-items: center; font-size: 12.5px;" style-hover="background: #f8fafd;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ d.k }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ d.v }}</div>
+        <div style="color: #4b5563;">{{ d.owner }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ d.size }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ d.rec }}</div>
+        <div style="color: #4b5563;">{{ d.cls }}</div>
+        <div style="color: {{ d.tone }}; font-weight: 500;">{{ d.q }}</div>
+        <div style="color: #6b7484;">{{ d.upd }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDataset }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; font-family: 'IBM Plex Mono', monospace;">fraud_txn_features</h1>
+      <div style="margin-top: 4px; color: #6b7484;">v37 · 42.1M records · 412 GiB · Confidential (PCI) · updated 2h ago</div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <div onClick="{{ newVersion }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Create new version</div>
+      <div onClick="{{ goNewJob }}" style="padding: 8px 13px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Train on this version</div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 18px 0 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;"><div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">Quality score</div><div style="font-size: 24px; font-weight: 600;">96</div><div style="font-size: 12px; color: oklch(0.55 0.13 152);">All checks passed</div></div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;"><div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">Missing values</div><div style="font-size: 24px; font-weight: 600;">0.41%</div><div style="font-size: 12px; color: #6b7484;">device_fingerprint 3.1%</div></div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;"><div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">Duplicate records</div><div style="font-size: 24px; font-weight: 600;">1,204</div><div style="font-size: 12px; color: #6b7484;">0.003% · dropped on load</div></div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;"><div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">Label distribution</div><div style="font-size: 24px; font-weight: 600;">1.84%</div><div style="display: flex; height: 6px; border-radius: 4px; overflow: hidden; margin-top: 6px; background: #eef1f5;"><span style="width: 1.84%; background: oklch(0.58 0.19 25);"></span></div></div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Schema</div>
+      <sc-for list="{{ schema }}" as="c" hint-placeholder-count="7">
+        <div style="display: grid; grid-template-columns: 1.6fr 0.8fr 0.6fr 1.4fr; gap: 10px; padding: 9px 18px; border-bottom: 1px solid #f3f5f8; font-size: 12.5px;">
+          <div style="font-family: 'IBM Plex Mono', monospace;">{{ c.c }}</div>
+          <div style="color: #6b7484;">{{ c.t }}</div>
+          <div style="font-family: 'IBM Plex Mono', monospace;">{{ c.n }}</div>
+          <div style="color: #6b7484;">{{ c.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: grid; gap: 14px; align-content: start;">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Lineage and transformations</div>
+        <sc-for list="{{ lineage }}" as="l" hint-placeholder-count="4">
+          <div style="padding: 10px 18px; border-bottom: 1px solid #f3f5f8;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">{{ l.k }}</div>
+            <div style="color: #6b7484; font-size: 12px;">{{ l.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px 18px;">
+        <div style="font-weight: 600; margin-bottom: 8px;">Approved consumers</div>
+        <div style="color: #4b5563; font-size: 12.5px; line-height: 1.7;">Fraud Detection Platform · Risk Reporting · Chargeback Analytics<br /><span style="color: #6b7484;">Storage:</span> <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;">s3://acme-ml-data/fraud/features/v37/</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPipelines }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Pipelines</h1>
+  <div style="color: #6b7484; margin-bottom: 18px;">Kubeflow pipelines for feature builds, retraining and evaluation harnesses.</div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <div style="font-weight: 600;">churn-drift-retrain · current run</div>
+      <div onClick="{{ startRetrain }}" style="padding: 7px 12px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Trigger retraining</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px;">
+      <sc-for list="{{ pipelineSteps }}" as="s" hint-placeholder-count="8">
+        <div style="background: {{ s.bg }}; border: 1px solid {{ s.tone }}; border-radius: 7px; padding: 11px 12px;">
+          <div style="font-size: 12.5px; font-weight: 600;">{{ s.k }}</div>
+          <div style="font-size: 11.5px; color: {{ s.tone }}; margin-top: 3px;">{{ s.state }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.6fr 1.4fr 1fr 1fr 0.8fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Pipeline</div><div>Trigger</div><div>Last run</div><div>Status</div><div>Duration</div>
+    </div>
+    <sc-for list="{{ pipelines }}" as="p" hint-placeholder-count="4">
+      <div style="display: grid; grid-template-columns: 1.6fr 1.4fr 1fr 1fr 0.8fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; font-size: 12.5px; align-items: center;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ p.k }}</div>
+        <div style="color: #4b5563;">{{ p.trigger }}</div>
+        <div style="color: #6b7484;">{{ p.last }}</div>
+        <div style="color: {{ p.tone }}; font-weight: 500;">{{ p.status }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.dur }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ isNewJob }}">
+<div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px; align-items: start;">
+  <div>
+    <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Submit training job</h1>
+    <div style="color: #6b7484; margin-bottom: 16px;">Scheduling, quota admission and GPU placement are handled by the platform.</div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 20px 22px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 13px 16px;">
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Project</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>Fraud Detection Platform</option><option>Product Recommendation Engine</option><option>Customer Churn Predictor</option><option>Support Assistant LLM</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Source repository</span><input defaultValue="acme-ml/fraud-detection" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Branch or commit</span><input defaultValue="main @ 8ac31f2" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Dataset version</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>fraud_txn_features v37</option><option>fraud_txn_features v36</option><option>merchant_reference v3</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Framework</span>
+          <select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;">
+            <sc-for list="{{ frameworks }}" as="fw" hint-placeholder-count="6"><option>{{ fw }}</option></sc-for>
+          </select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Container image</span><input defaultValue="registry.acme.io/ml/pytorch-2.3-cu124" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Training script</span><input defaultValue="src/train_deep_wide.py" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Compute profile</span>
+          <select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;">
+            <sc-for list="{{ computeProfiles }}" as="cp" hint-placeholder-count="6"><option>{{ cp }}</option></sc-for>
+          </select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Nodes</span><input defaultValue="1" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">GPUs per node</span><input defaultValue="4" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Priority</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>High</option><option>Critical</option><option>Normal</option><option>Low (preemptible)</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Maximum runtime</span><input defaultValue="4h" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Checkpoint interval</span><input defaultValue="every 5 epochs" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+      </div>
+      <div style="margin-top: 18px;">
+        <div style="font-size: 12px; color: #4b5563; margin-bottom: 8px;">Hyperparameters</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+          <sc-for list="{{ hyper }}" as="h" hint-placeholder-count="6">
+            <div style="display: flex; border: 1px solid #dfe3e9; border-radius: 6px; overflow: hidden;">
+              <span style="flex: 1; padding: 7px 9px; background: #fafbfc; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #4b5563; border-right: 1px solid #e9ecf1;">{{ h.k }}</span>
+              <input defaultValue="{{ h.v }}" style="width: 74px; border: none; outline: none; padding: 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;" />
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: grid; gap: 14px; margin-top: 52px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Before you submit</div>
+      <sc-for list="{{ estimates }}" as="e" hint-placeholder-count="4">
+        <div style="padding: 9px 0; border-bottom: 1px solid #f3f5f8;">
+          <div style="display: flex; justify-content: space-between; gap: 10px;">
+            <span style="color: #4b5563;">{{ e.k }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ e.v }}</span>
+          </div>
+          <div style="color: #98a1af; font-size: 11.5px;">{{ e.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Policy validation</div>
+      <sc-for list="{{ policies }}" as="p" hint-placeholder-count="5">
+        <div style="display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f3f5f8;">
+          <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; color: {{ p.tone }}; background: {{ p.bg }}; border: 1px solid {{ p.bd }}; border-radius: 4px; padding: 2px 5px; height: 18px; flex: 0 0 auto;">{{ p.mark }}</span>
+          <div>
+            <div style="font-size: 12.5px; font-weight: 500;">{{ p.k }}</div>
+            <div style="color: #6b7484; font-size: 11.5px;">{{ p.d }}</div>
+          </div>
+        </div>
+      </sc-for>
+      <div onClick="{{ submitJob }}" style="margin-top: 14px; text-align: center; padding: 10px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500;" style-hover="filter: brightness(0.94);">Submit Training Job</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isJob }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; font-family: 'IBM Plex Mono', monospace;">{{ job.name }}</h1>
+      <div style="margin-top: 5px; display: flex; align-items: center; gap: 10px;">
+        <span style="padding: 2px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 600; color: {{ job.tone }}; background: {{ job.bg }}; border: 1px solid {{ job.tone }};">{{ job.status }}</span>
+        <span style="color: #6b7484; font-size: 12.5px;">Fraud Detection Platform · epoch {{ job.epoch }} · elapsed {{ job.elapsed }} · ETA {{ job.eta }} · {{ job.cost }}</span>
+      </div>
+    </div>
+    <div style="display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; max-width: 420px;">
+      <sc-for list="{{ jobActions }}" as="a" hint-placeholder-count="5">
+        <div onClick="{{ a.onClick }}" style="padding: 7px 12px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px; white-space: nowrap;" style-hover="background: #f6f8fb;">{{ a.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px 20px; margin: 16px 0 14px;">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12.5px;">
+      <span style="font-weight: 500;">Progress</span><span style="font-family: 'IBM Plex Mono', monospace;">{{ job.pct }}</span>
+    </div>
+    <div style="height: 8px; background: #eef1f5; border-radius: 6px; overflow: hidden;">
+      <div style="height: 100%; width: {{ job.barW }}; background: {{ job.tone }}; transition: width 0.4s ease;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px 20px; margin-top: 16px;">
+      <sc-for list="{{ jobFacts }}" as="f" hint-placeholder-count="6">
+        <div>
+          <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ f.k }}</div>
+          <div style="font-size: 12.5px; font-family: 'IBM Plex Mono', monospace; margin-top: 2px;">{{ f.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 20px; border-bottom: 1px solid #e4e7ec; margin-bottom: 16px;">
+    <sc-for list="{{ jobTabs }}" as="t" hint-placeholder-count="7">
+      <div onClick="{{ t.onClick }}" style="padding: 9px 2px; cursor: pointer; border-bottom: 2px solid {{ t.bd }}; color: {{ t.color }}; font-weight: {{ t.weight }}; font-size: 13px;">{{ t.label }}</div>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ isJobMetrics }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px;">
+      <sc-for list="{{ jobCharts }}" as="c" hint-placeholder-count="8">
+        <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+            <span style="font-size: 12.5px; font-weight: 500;">{{ c.title }}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">{{ c.value }}</span>
+          </div>
+          <svg viewBox="0 0 280 70" preserveAspectRatio="none" style="width: 100%; height: 74px; display: block;">
+            <path d="{{ c.a }}" fill="oklch(0.62 0.16 258 / 0.09)"></path>
+            <path d="{{ c.d }}" fill="none" stroke="{{ c.color }}" stroke-width="1.6" vector-effect="non-scaling-stroke"></path>
+          </svg>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isJobLogs }}">
+    <div style="background: #1c2330; border-radius: 8px; padding: 16px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #c3ccd9; line-height: 1.85;">
+      <sc-for list="{{ logLines }}" as="l" hint-placeholder-count="8">
+        <div>{{ l }}</div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isJobOther }}">
+    <div style="background: #fff; border: 1px dashed #dfe3e9; border-radius: 8px; padding: 44px; text-align: center;">
+      <div style="font-weight: 600;">{{ jobOtherLabel }}</div>
+      <div style="color: #6b7484; margin-top: 5px; font-size: 12.5px;">Populated once the run reaches its next checkpoint boundary.</div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isJobs }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Training jobs</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Kueue admission across teams · median queue wait 6m 40s</div>
+    </div>
+    <div onClick="{{ goNewJob }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Submit job</div>
+  </div>
+  <div style="display: flex; gap: 8px; margin: 16px 0 12px;">
+    <sc-for list="{{ queueTabs }}" as="t" hint-placeholder-count="4">
+      <div onClick="{{ t.onClick }}" style="padding: 6px 13px; border-radius: 20px; cursor: pointer; font-size: 12.5px; background: {{ t.bg }}; color: {{ t.fg }}; border: 1px solid {{ t.bd }};">{{ t.label }}</div>
+    </sc-for>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.8fr 1.3fr 0.8fr 1fr 1fr 0.9fr 1.1fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Job</div><div>Team</div><div>Priority</div><div>GPUs</div><div>Queue wait</div><div>Runtime</div><div>Status</div>
+    </div>
+    <sc-for list="{{ queueJobs }}" as="j" hint-placeholder-count="3">
+      <div onClick="{{ goJob }}" style="display: grid; grid-template-columns: 1.8fr 1.3fr 0.8fr 1fr 1fr 0.9fr 1.1fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ j.k }}</div>
+        <div style="color: #4b5563;">{{ j.team }}</div>
+        <div style="color: #4b5563;">{{ j.pri }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ j.gpus }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ j.wait }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ j.rt }}</div>
+        <div style="color: {{ j.tone }}; font-weight: 500;">{{ j.status }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isGpu }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">GPU capacity</h1>
+  <div style="color: #6b7484; margin-bottom: 18px;">160 GPUs across 5 pools · 124 allocated · queue pressure moderate</div>
+  <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-bottom: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Cluster map · 160 GPUs</div>
+      <div style="display: grid; grid-template-columns: repeat(32, 1fr); gap: 3px;">
+        <sc-for list="{{ clusterMap }}" as="g" hint-placeholder-count="160">
+          <span style="aspect-ratio: 1; border-radius: 2px; background: {{ g.bg }};"></span>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 16px; margin-top: 14px; font-size: 11.5px; color: #6b7484;">
+        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; border-radius: 2px; background: oklch(0.62 0.16 258);"></span>Allocated</span>
+        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; border-radius: 2px; background: oklch(0.72 0.11 258);"></span>Reserved</span>
+        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; border-radius: 2px; background: #e7ebf0;"></span>Free</span>
+        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 9px; height: 9px; border-radius: 2px; background: oklch(0.58 0.19 25);"></span>Unhealthy</span>
+      </div>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Queue pressure</div>
+      <div style="display: grid; gap: 12px;">
+        <div><div style="display: flex; justify-content: space-between; font-size: 12.5px;"><span>Pending GPU demand</span><span style="font-family: 'IBM Plex Mono', monospace;">5 GPUs</span></div><div style="height: 7px; background: #eef1f5; border-radius: 5px; margin-top: 5px;"><div style="height: 100%; width: 22%; background: oklch(0.62 0.14 152); border-radius: 5px;"></div></div></div>
+        <div><div style="display: flex; justify-content: space-between; font-size: 12.5px;"><span>Allocation</span><span style="font-family: 'IBM Plex Mono', monospace;">78%</span></div><div style="height: 7px; background: #eef1f5; border-radius: 5px; margin-top: 5px;"><div style="height: 100%; width: 78%; background: oklch(0.62 0.16 258); border-radius: 5px;"></div></div></div>
+        <div><div style="display: flex; justify-content: space-between; font-size: 12.5px;"><span>H100 pool saturation</span><span style="font-family: 'IBM Plex Mono', monospace;">94%</span></div><div style="height: 7px; background: #eef1f5; border-radius: 5px; margin-top: 5px;"><div style="height: 100%; width: 94%; background: oklch(0.62 0.15 72); border-radius: 5px;"></div></div></div>
+        <div style="background: #fdf8ee; border: 1px solid #f0dfba; border-radius: 7px; padding: 11px 13px; font-size: 12.5px; color: #8a6212;">H100 pool is saturated with 2 unhealthy GPUs. LLM fine-tuning requests will queue for ~34 minutes.</div>
+      </div>
+    </div>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.4fr 1.6fr 0.7fr 0.8fr 0.8fr 0.8fr 0.9fr 0.9fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Node pool</div><div>GPU model</div><div>Total</div><div>Allocated</div><div>Available</div><div>Reserved</div><div>Unhealthy</div><div>Utilisation</div>
+    </div>
+    <sc-for list="{{ gpuPools }}" as="p" hint-placeholder-count="5">
+      <div style="display: grid; grid-template-columns: 1.4fr 1.6fr 0.7fr 0.8fr 0.8fr 0.8fr 0.9fr 0.9fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; font-size: 12.5px; align-items: center;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ p.k }}</div>
+        <div style="color: #4b5563;">{{ p.model }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.total }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.alloc }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.free }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.res }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.bad }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ p.pct }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isExperiments }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Experiments</h1>
+      <div style="margin-top: 4px; color: #6b7484;">exp-fraud-detection · MLflow tracking · requirement: AUC ≥ 0.980 and p95 ≤ 60 ms</div>
+    </div>
+    <div onClick="{{ promote }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Promote to Model Candidate</div>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden; margin: 16px 0 14px;">
+    <div style="display: grid; grid-template-columns: 0.3fr 2.2fr 1.2fr 0.7fr 0.9fr 0.8fr 0.7fr 0.8fr 0.8fr 1.2fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div></div><div>Run</div><div>Model type</div><div>Data</div><div>Commit</div><div>AUC</div><div>F1</div><div>Time</div><div>Cost</div><div>Status</div>
+    </div>
+    <sc-for list="{{ runs }}" as="r" hint-placeholder-count="6">
+      <div onClick="{{ r.toggle }}" style="display: grid; grid-template-columns: 0.3fr 2.2fr 1.2fr 0.7fr 0.9fr 0.8fr 0.7fr 0.8fr 0.8fr 1.2fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer; background: {{ r.bg }};" style-hover="background: #f2f6ff;">
+        <div><input type="checkbox" checked="{{ r.sel }}" style="width: 14px; height: 14px; accent-color: oklch(0.52 0.15 258);" /></div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ r.name }} <span style="color: oklch(0.6 0.15 72); font-family: 'IBM Plex Sans', sans-serif; font-size: 11px;">{{ r.mark }}</span></div>
+        <div style="color: #4b5563;">{{ r.model }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.ds }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.commit }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.auc }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.f1 }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.time }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ r.cost }}</div>
+        <div style="color: oklch(0.55 0.13 152);">{{ r.status }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+        <span style="font-weight: 600;">Comparison · {{ selCount }} runs selected</span>
+        <span style="font-size: 12px; color: #6b7484;">run-41 baseline vs run-47 candidate</span>
+      </div>
+      <sc-for list="{{ compareBars }}" as="c" hint-placeholder-count="5">
+        <div style="margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;"><span>{{ c.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; color: #6b7484;">{{ c.a }} → {{ c.b }}</span></div>
+          <div style="display: grid; gap: 4px;">
+            <div style="height: 8px; background: #eef1f5; border-radius: 5px;"><div style="height: 100%; width: {{ c.wa }}; background: #b8c2d0; border-radius: 5px;"></div></div>
+            <div style="height: 8px; background: #eef1f5; border-radius: 5px;"><div style="height: 100%; width: {{ c.wb }}; background: oklch(0.62 0.16 258); border-radius: 5px;"></div></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #cde9d7; border-radius: 8px; padding: 18px 20px;">
+      <div style="display: inline-block; padding: 3px 9px; border-radius: 20px; background: #f0f9f3; color: oklch(0.5 0.13 152); font-size: 11px; font-weight: 600; margin-bottom: 10px;">BEST CANDIDATE</div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px;">run-47 · deep-wide+focal+cal</div>
+      <div style="color: #4b5563; font-size: 12.5px; margin-top: 8px; line-height: 1.7;">Meets both requirements: AUC 0.9871 (≥ 0.980) and p95 23 ms (≤ 60 ms). Recall at 1% FPR improves 3.5 points over production v13 at $47.10 training cost — a fifth of run-48 for 0.13 points more AUC.</div>
+      <div onClick="{{ promote }}" style="margin-top: 16px; text-align: center; padding: 10px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500;">Promote to Model Candidate</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ isModels }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Model registry</h1>
+  <div style="color: #6b7484; margin-bottom: 16px;">Stages: Experimental → Candidate → Approved → Staging → Production → Archived</div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.6fr 0.6fr 1fr 1.4fr 1.2fr 1.1fr 1.2fr 0.9fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Model</div><div>Version</div><div>Stage</div><div>Framework</div><div>Quality</div><div>Owner</div><div>Deployment</div><div>Updated</div>
+    </div>
+    <sc-for list="{{ models }}" as="m" hint-placeholder-count="6">
+      <div onClick="{{ m.onClick }}" style="display: grid; grid-template-columns: 1.6fr 0.6fr 1fr 1.4fr 1.2fr 1.1fr 1.2fr 0.9fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ m.k }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ m.v }}</div>
+        <div><span style="padding: 2px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500; color: {{ m.tone }}; border: 1px solid {{ m.tone }};">{{ m.stage }}</span></div>
+        <div style="color: #4b5563;">{{ m.fw }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ m.q }}</div>
+        <div style="color: #4b5563;">{{ m.owner }}</div>
+        <div style="color: #4b5563;">{{ m.dep }}</div>
+        <div style="color: #6b7484;">{{ m.upd }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isModel }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; font-family: 'IBM Plex Mono', monospace;">fraud-detector v14</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Registered 12m ago from run-47 · owner Ana Reyes · Risk Intelligence</div>
+    </div>
+    <div style="display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end;">
+      <div onClick="{{ requestApproval }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Request approval</div>
+      <div onClick="{{ goDeploy }}" style="padding: 8px 13px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Deploy to staging</div>
+      <div onClick="{{ rejectModel }}" style="padding: 8px 13px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Archive</div>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-top: 18px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Model card</div>
+      <sc-for list="{{ modelCard }}" as="c" hint-placeholder-count="8">
+        <div style="padding: 11px 18px; border-bottom: 1px solid #f3f5f8;">
+          <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ c.k }}</div>
+          <div style="margin-top: 3px; font-size: 12.5px;">{{ c.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: grid; gap: 14px; align-content: start;">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Approval history</div>
+        <sc-for list="{{ approvalHistory }}" as="h" hint-placeholder-count="3">
+          <div style="display: flex; gap: 10px; padding: 11px 18px; border-bottom: 1px solid #f3f5f8;">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ h.tone }}; margin-top: 6px; flex: 0 0 7px;"></span>
+            <div style="flex: 1;">
+              <div style="font-size: 12.5px; font-weight: 500;">{{ h.who }}</div>
+              <div style="color: #6b7484; font-size: 12px;">{{ h.what }}</div>
+            </div>
+            <div style="color: #98a1af; font-size: 12px;">{{ h.when }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px 18px;">
+        <div style="font-weight: 600; margin-bottom: 10px;">Deployment history</div>
+        <div style="font-size: 12.5px; color: #4b5563; line-height: 1.8;">v13 → production 9 days ago (rolling)<br />v12 → archived 3 weeks ago<br />v11 → rolled back 2 months ago after drift</div>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApprove }}">
+<div style="max-width: 1000px;">
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Approve fraud-detector v14</h1>
+  <div style="color: #6b7484; margin-bottom: 18px;">Production approval requires all gates to pass or an explicit waiver. Two approvers required.</div>
+  <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Deployment gates</div>
+      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="8">
+        <div style="display: flex; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: flex-start;">
+          <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.04em; color: {{ g.tone }}; background: {{ g.bg }}; border: 1px solid {{ g.bd }}; border-radius: 4px; padding: 3px 6px; flex: 0 0 auto;">{{ g.mark }}</span>
+          <div>
+            <div style="font-weight: 500; font-size: 12.5px;">{{ g.k }}</div>
+            <div style="color: #6b7484; font-size: 12px;">{{ g.d }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display: grid; gap: 14px; align-content: start;">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+        <div style="font-weight: 600; margin-bottom: 10px;">Approval decision</div>
+        <textarea placeholder="Add a comment for the audit trail…" style="width: 100%; height: 78px; padding: 9px 11px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none; resize: vertical;"></textarea>
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <div onClick="{{ approveModel }}" style="flex: 1; text-align: center; padding: 10px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500;">Approve for production</div>
+          <div onClick="{{ rejectModel }}" style="padding: 10px 14px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer;">Reject</div>
+        </div>
+        <div style="color: #6b7484; font-size: 11.5px; margin-top: 9px;">Approving with the latency gate flagged records a waiver against your identity.</div>
+      </div>
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 13px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Approver history</div>
+        <sc-for list="{{ approvalHistory }}" as="h" hint-placeholder-count="3">
+          <div style="padding: 10px 18px; border-bottom: 1px solid #f3f5f8; font-size: 12.5px;">
+            <div style="font-weight: 500;">{{ h.who }}</div>
+            <div style="color: #6b7484; font-size: 12px;">{{ h.what }} · {{ h.when }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDeployments }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Deployments</h1>
+      <div style="margin-top: 4px; color: #6b7484;">7 inference endpoints on KServe · 1 degraded</div>
+    </div>
+    <div onClick="{{ goDeploy }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Deploy endpoint</div>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden; margin-top: 16px;">
+    <div style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Endpoint</div><div>Model</div><div>Runtime</div><div>Replicas</div><div>p95</div><div>Traffic</div><div>SLO</div>
+    </div>
+    <div onClick="{{ goDeployment }}" style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">fraud-detector-prod</div><div style="font-family: 'IBM Plex Mono', monospace;">v13 / v14</div><div style="color: #4b5563;">Triton + TensorRT</div><div style="font-family: 'IBM Plex Mono', monospace;">6</div><div style="font-family: 'IBM Plex Mono', monospace;">128 ms</div><div style="font-family: 'IBM Plex Mono', monospace;">{{ prodPct }} / {{ canary }}</div><div style="color: oklch(0.58 0.19 25); font-weight: 500;">Breaching</div>
+    </div>
+    <div onClick="{{ goDeployment }}" style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">reco-ranker-prod</div><div style="font-family: 'IBM Plex Mono', monospace;">v9</div><div style="color: #4b5563;">Triton</div><div style="font-family: 'IBM Plex Mono', monospace;">8</div><div style="font-family: 'IBM Plex Mono', monospace;">34 ms</div><div style="font-family: 'IBM Plex Mono', monospace;">100</div><div style="color: oklch(0.55 0.13 152); font-weight: 500;">Healthy</div>
+    </div>
+    <div onClick="{{ goDeployment }}" style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">support-assistant-prod</div><div style="font-family: 'IBM Plex Mono', monospace;">v3</div><div style="color: #4b5563;">vLLM · TensorRT-LLM</div><div style="font-family: 'IBM Plex Mono', monospace;">4</div><div style="font-family: 'IBM Plex Mono', monospace;">182 ms TTFT</div><div style="font-family: 'IBM Plex Mono', monospace;">100</div><div style="color: oklch(0.55 0.13 152); font-weight: 500;">Healthy</div>
+    </div>
+    <div onClick="{{ goDeployment }}" style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">churn-predictor-staging</div><div style="font-family: 'IBM Plex Mono', monospace;">v6</div><div style="color: #4b5563;">Custom runtime</div><div style="font-family: 'IBM Plex Mono', monospace;">3</div><div style="font-family: 'IBM Plex Mono', monospace;">21 ms</div><div style="font-family: 'IBM Plex Mono', monospace;">100</div><div style="color: oklch(0.55 0.13 152); font-weight: 500;">Healthy</div>
+    </div>
+    <div onClick="{{ goDeployment }}" style="display: grid; grid-template-columns: 1.7fr 1.1fr 1.5fr 0.9fr 1fr 1fr 1fr; gap: 10px; padding: 12px 18px; align-items: center; font-size: 12.5px; cursor: pointer;" style-hover="background: #f8fafd;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">support-assistant-shadow</div><div style="font-family: 'IBM Plex Mono', monospace;">v4</div><div style="color: #4b5563;">NVIDIA NIM</div><div style="font-family: 'IBM Plex Mono', monospace;">2</div><div style="font-family: 'IBM Plex Mono', monospace;">164 ms TTFT</div><div style="font-family: 'IBM Plex Mono', monospace;">shadow</div><div style="color: oklch(0.62 0.16 258); font-weight: 500;">Evaluating</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDeploy }}">
+<div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px; align-items: start;">
+  <div>
+    <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Deploy inference endpoint</h1>
+    <div style="color: #6b7484; margin-bottom: 16px;">KServe InferenceService generated and committed to the project GitOps directory.</div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 20px 22px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 13px 16px;">
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Model and version</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>fraud-detector v14 (approved)</option><option>fraud-detector v13 (production)</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Environment</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>Production · eu-west-1</option><option>Staging</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Serving runtime</span>
+          <select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;">
+            <sc-for list="{{ runtimes }}" as="r" hint-placeholder-count="6"><option>{{ r }}</option></sc-for>
+          </select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Accelerator profile</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>1 × A10G 24GB</option><option>1 × A100 40GB</option><option>MIG 1g.10gb</option><option>CPU only</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Minimum replicas</span><input defaultValue="2" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Maximum replicas</span><input defaultValue="12" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Autoscaling metric</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>Concurrency</option><option>Requests per second</option><option>GPU utilisation</option></select></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Target latency</span><input defaultValue="60 ms p95" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Traffic limit</span><input defaultValue="2,000 rps" style="width: 100%; height: 34px; padding: 0 10px; border: 1px solid #dfe3e9; border-radius: 6px; outline: none;" /></label>
+        <label style="display: block;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Authentication</span><select style="width: 100%; height: 34px; padding: 0 8px; border: 1px solid #dfe3e9; border-radius: 6px; background: #fff;"><option>mTLS + service token</option><option>OIDC</option><option>API key</option></select></label>
+        <label style="display: block; grid-column: span 2;"><span style="display: block; font-size: 12px; color: #4b5563; margin-bottom: 5px;">Deployment strategy</span>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+            <sc-for list="{{ strategies }}" as="s" hint-placeholder-count="4">
+              <div style="border: 1px solid #e4e7ec; border-radius: 6px; padding: 9px 11px; font-size: 12.5px; cursor: pointer;" style-hover="border-color: oklch(0.62 0.16 258); background: #f6f9ff;">{{ s }}</div>
+            </sc-for>
+          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: #6b7484;">Canary selected · start at 10% of traffic to v14, hold 30 minutes, auto-rollback on p95 &gt; 60 ms.</div>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div style="display: grid; gap: 14px; margin-top: 52px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Pre-flight</div>
+      <sc-for list="{{ deployEstimates }}" as="e" hint-placeholder-count="4">
+        <div style="display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f3f5f8;">
+          <span style="color: #4b5563;">{{ e.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ e.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Checks</div>
+      <sc-for list="{{ deployChecks }}" as="c" hint-placeholder-count="4">
+        <div style="display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f3f5f8;">
+          <span style="font-size: 10px; font-weight: 600; color: {{ c.tone }}; background: {{ c.bg }}; border: 1px solid {{ c.bd }}; border-radius: 4px; padding: 2px 5px; height: 18px; flex: 0 0 auto;">{{ c.mark }}</span>
+          <div><div style="font-size: 12.5px; font-weight: 500;">{{ c.k }}</div><div style="color: #6b7484; font-size: 11.5px;">{{ c.d }}</div></div>
+        </div>
+      </sc-for>
+      <div onClick="{{ doDeploy }}" style="margin-top: 14px; text-align: center; padding: 10px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-weight: 500;">Deploy endpoint</div>
+      <div onClick="{{ goApprove }}" style="margin-top: 8px; text-align: center; padding: 9px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Open approval screen</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDeployment }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; font-family: 'IBM Plex Mono', monospace;">fraud-detector-prod</h1>
+      <div style="margin-top: 4px; color: #6b7484;">Production · eu-west-1 · KServe InferenceService · GitOps managed</div>
+    </div>
+    <div style="display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; max-width: 480px;">
+      <sc-for list="{{ depActions }}" as="a" hint-placeholder-count="6">
+        <div onClick="{{ a.onClick }}" style="padding: 7px 12px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px; white-space: nowrap;" style-hover="background: #f6f8fb;">{{ a.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 18px 0 14px;">
+    <sc-for list="{{ depFacts }}" as="f" hint-placeholder-count="6">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 13px 15px;">
+        <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ f.k }}</div>
+        <div style="margin-top: 3px; font-size: 12.5px; font-family: 'IBM Plex Mono', monospace; word-break: break-all;">{{ f.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+      <span style="font-weight: 600;">Canary traffic</span>
+      <span style="font-size: 12.5px; color: #6b7484;">auto-rollback armed · p95 &gt; 60 ms for 5 minutes</span>
+    </div>
+    <div style="display: flex; height: 30px; border-radius: 7px; overflow: hidden; background: #eef1f5;">
+      <div style="width: {{ prodW }}; min-width: 0; flex: none; overflow: hidden; background: oklch(0.52 0.15 258); color: #fff; display: flex; align-items: center; padding: 0 12px; transition: width 0.4s ease;"><span style="font-size: 12px; font-weight: 500; white-space: nowrap;">v13 production {{ prodPct }}%</span></div>
+      <div style="width: {{ canaryW }}; min-width: 0; flex: none; overflow: hidden; background: oklch(0.66 0.15 72); color: #fff; display: flex; align-items: center; padding: 0 10px; transition: width 0.4s ease;"><span style="font-size: 12px; font-weight: 500; white-space: nowrap;">v14 {{ canary }}%</span></div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px;">
+    <sc-for list="{{ monCharts }}" as="c" hint-placeholder-count="4">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+          <span style="font-size: 12.5px; font-weight: 500;">{{ c.title }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{ c.color }};">{{ c.value }}</span>
+        </div>
+        <svg viewBox="0 0 280 70" preserveAspectRatio="none" style="width: 100%; height: 74px; display: block;">
+          <path d="{{ c.a }}" fill="oklch(0.62 0.16 258 / 0.09)"></path>
+          <path d="{{ c.d }}" fill="none" stroke="{{ c.color }}" stroke-width="1.6" vector-effect="non-scaling-stroke"></path>
+        </svg>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isMonitoring }}">
+<div>
+  <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+    <div>
+      <h1 style="margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Production monitoring</h1>
+      <div style="margin-top: 4px; color: #6b7484;">fraud-detector-prod · last 6 hours · Prometheus + DCGM + model quality monitors</div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <div onClick="{{ goDeployment }}" style="padding: 8px 13px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12.5px;">Open deployment</div>
+      <div onClick="{{ startRetrain }}" style="padding: 8px 13px; background: oklch(0.52 0.15 258); color: #fff; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500;">Start retraining</div>
+    </div>
+  </div>
+
+  <sc-if value="{{ hasAlerts }}">
+    <div style="display: grid; gap: 8px; margin: 16px 0 14px;">
+      <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="2">
+        <div style="display: flex; gap: 12px; align-items: center; background: {{ a.bg }}; border: 1px solid {{ a.bd }}; border-radius: 8px; padding: 12px 16px;">
+          <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; color: {{ a.color }}; flex: 0 0 62px;">{{ a.sev }}</span>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 12.5px;">{{ a.title }}</div>
+            <div style="color: #6b7484; font-size: 12px;">{{ a.body }}</div>
+          </div>
+          <div onClick="{{ goDeployment }}" style="padding: 6px 11px; background: #fff; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px; white-space: nowrap;">Investigate</div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ rolledBack }}">
+    <div style="background: #f0f9f3; border: 1px solid #cde9d7; border-radius: 8px; padding: 12px 16px; margin: 16px 0 14px; font-size: 12.5px; color: oklch(0.44 0.11 152);">Service healthy · v13 serving 100% of traffic · p95 41 ms, error rate 0.08%, all SLOs met for 12 minutes.</div>
+  </sc-if>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 14px;">
+    <sc-for list="{{ monCharts }}" as="c" hint-placeholder-count="4">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+          <span style="font-size: 12.5px; font-weight: 500;">{{ c.title }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{ c.color }};">{{ c.value }}</span>
+        </div>
+        <svg viewBox="0 0 280 70" preserveAspectRatio="none" style="width: 100%; height: 74px; display: block;">
+          <path d="{{ c.a }}" fill="oklch(0.62 0.16 258 / 0.09)"></path>
+          <path d="{{ c.d }}" fill="none" stroke="{{ c.color }}" stroke-width="1.6" vector-effect="non-scaling-stroke"></path>
+        </svg>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Service metrics</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px;">
+        <sc-for list="{{ svcMetrics }}" as="m" hint-placeholder-count="8">
+          <div style="display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid #f3f5f8; padding-bottom: 6px;">
+            <span style="color: #4b5563; font-size: 12.5px;">{{ m.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ m.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">GPU metrics</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px;">
+        <sc-for list="{{ gpuMetrics }}" as="m" hint-placeholder-count="6">
+          <div style="display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid #f3f5f8; padding-bottom: 6px;">
+            <span style="color: #4b5563; font-size: 12.5px;">{{ m.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ m.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Model quality</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px;">
+        <sc-for list="{{ modelMetrics }}" as="m" hint-placeholder-count="6">
+          <div style="display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid #f3f5f8; padding-bottom: 6px;">
+            <span style="color: #4b5563; font-size: 12.5px;">{{ m.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ m.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <sc-if value="{{ showLlm }}">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+        <div style="font-weight: 600; margin-bottom: 4px;">LLM metrics</div>
+        <div style="color: #6b7484; font-size: 12px; margin-bottom: 12px;">support-assistant-prod · vLLM</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px;">
+          <sc-for list="{{ llmMetrics }}" as="m" hint-placeholder-count="7">
+            <div style="display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid #f3f5f8; padding-bottom: 6px;">
+              <span style="color: #4b5563; font-size: 12.5px;">{{ m.k }}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;">{{ m.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCost }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Cost and usage</h1>
+  <div style="color: #6b7484; margin-bottom: 16px;">July 2026 · $73,000 platform budget · attribution from Kubernetes labels and DCGM</div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 14px;">
+    <sc-for list="{{ unitCosts }}" as="u" hint-placeholder-count="6">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 14px 16px;">
+        <div style="font-size: 11.5px; color: #6b7484; text-transform: uppercase; letter-spacing: 0.06em;">{{ u.k }}</div>
+        <div style="font-size: 21px; font-weight: 600; margin-top: 4px; letter-spacing: -0.02em;">{{ u.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden; margin-bottom: 14px;">
+    <div style="display: grid; grid-template-columns: 1.2fr 1.8fr 1fr 1fr 0.9fr 1fr 1.6fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Team</div><div>Project</div><div>Training</div><div>Inference</div><div>Idle</div><div>Total</div><div>Budget use</div>
+    </div>
+    <sc-for list="{{ costRows }}" as="c" hint-placeholder-count="4">
+      <div style="display: grid; grid-template-columns: 1.2fr 1.8fr 1fr 1fr 0.9fr 1fr 1.6fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px;">
+        <div style="font-weight: 500;">{{ c.k }}</div>
+        <div style="color: #4b5563;">{{ c.proj }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ c.train }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ c.inf }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ c.idle }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-weight: 500;">{{ c.total }}</div>
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <div style="flex: 1; height: 7px; background: #eef1f5; border-radius: 5px;"><div style="height: 100%; width: {{ c.w }}; background: {{ c.tone }}; border-radius: 5px;"></div></div>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #6b7484;">{{ c.w }} of {{ c.budget }}</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Recommendations · $6,892 / month identified</div>
+    <sc-for list="{{ recommendations }}" as="r" hint-placeholder-count="5">
+      <div style="display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8;">
+        <div style="flex: 1;">
+          <div style="font-weight: 500; font-size: 12.5px;">{{ r.k }}</div>
+          <div style="color: #6b7484; font-size: 12px;">{{ r.d }}</div>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; color: oklch(0.5 0.13 152); font-size: 12.5px;">{{ r.save }}</div>
+        <div onClick="{{ r.act }}" style="padding: 6px 12px; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px;" style-hover="background: #f6f8fb;">Apply</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isArch }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Platform architecture</h1>
+  <div style="color: #6b7484; margin-bottom: 18px;">Seven layers from developer experience down to GPU infrastructure and observability.</div>
+  <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 14px; align-items: start;">
+    <div style="display: grid; gap: 10px;">
+      <sc-for list="{{ archLayers }}" as="l" hint-placeholder-count="7">
+        <div style="background: {{ l.bg }}; border: 1px solid {{ l.bd }}; border-radius: 8px; padding: 14px 16px;">
+          <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: #6b7484; margin-bottom: 9px;">{{ l.k }}</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;">
+            <sc-for list="{{ l.items }}" as="i" hint-placeholder-count="5">
+              <span style="padding: 6px 11px; background: #fff; border: 1px solid #e0e5ec; border-radius: 6px; font-size: 12.5px; font-family: 'IBM Plex Mono', monospace;">{{ i }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 18px 20px;">
+      <div style="font-weight: 600; margin-bottom: 12px;">Flows</div>
+      <sc-for list="{{ archFlows }}" as="f" hint-placeholder-count="7">
+        <div style="display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f3f5f8;">
+          <span style="width: 3px; border-radius: 2px; background: {{ f.tone }}; flex: 0 0 3px;"></span>
+          <div>
+            <div style="font-size: 12.5px; font-weight: 500;">{{ f.k }}</div>
+            <div style="color: #6b7484; font-size: 12px;">{{ f.d }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAdmin }}">
+<div>
+  <h1 style="margin: 0 0 4px; font-size: 21px; font-weight: 600; letter-spacing: -0.02em;">Administration</h1>
+  <div style="color: #6b7484; margin-bottom: 16px;">Platform-wide policy, identity, quota and capacity configuration.</div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 16px;">
+    <sc-for list="{{ adminSections }}" as="a" hint-placeholder-count="10">
+      <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 15px 16px; display: flex; justify-content: space-between; gap: 12px; align-items: center;">
+        <div>
+          <div style="font-weight: 600; font-size: 13px;">{{ a.k }}</div>
+          <div style="color: #6b7484; font-size: 12px; margin-top: 2px;">{{ a.d }}</div>
+        </div>
+        <div onClick="{{ a.onClick }}" style="padding: 6px 11px; border: 1px solid #dfe3e9; border-radius: 6px; cursor: pointer; font-size: 12px; white-space: nowrap;" style-hover="background: #f6f8fb;">{{ a.v }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; overflow: hidden;">
+    <div style="padding: 14px 18px; border-bottom: 1px solid #eef0f4; font-weight: 600;">Team quotas</div>
+    <div style="display: grid; grid-template-columns: 1.3fr 1fr 0.8fr 1.1fr 0.9fr 1fr 1.4fr; gap: 10px; padding: 10px 18px; background: #fafbfc; border-bottom: 1px solid #e9ecf1; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7484;">
+      <div>Team</div><div>GPU quota</div><div>In use</div><div>CPU</div><div>Storage</div><div>Budget</div><div>Utilisation</div>
+    </div>
+    <sc-for list="{{ quotaRows }}" as="q" hint-placeholder-count="4">
+      <div style="display: grid; grid-template-columns: 1.3fr 1fr 0.8fr 1.1fr 0.9fr 1fr 1.4fr; gap: 10px; padding: 12px 18px; border-bottom: 1px solid #f3f5f8; align-items: center; font-size: 12.5px;">
+        <div style="font-weight: 500;">{{ q.k }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ q.gpu }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ q.used }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ q.cpu }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ q.store }}</div>
+        <div style="font-family: 'IBM Plex Mono', monospace;">{{ q.budget }}</div>
+        <div style="height: 7px; background: #eef1f5; border-radius: 5px;"><div style="height: 100%; width: {{ q.w }}; background: oklch(0.62 0.16 258); border-radius: 5px;"></div></div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+    </div>
+  </div>
+
+  <div style="position: fixed; right: 22px; bottom: 22px; display: flex; flex-direction: column; gap: 8px; z-index: 60;">
+    <sc-for list="{{ toasts }}" as="t" hint-placeholder-count="0">
+      <div style="min-width: 300px; background: #10151c; color: #e6ebf2; border-radius: 8px; padding: 12px 14px; box-shadow: 0 12px 28px rgba(16,21,28,0.28); animation: slidein 0.18s ease-out; border-left: 3px solid {{ t.color }};">
+        <div style="font-size: 12.5px; font-weight: 600;">{{ t.title }}</div>
+        <div style="font-size: 12px; color: #98a3b3; margin-top: 2px;">{{ t.body }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showLlmMetrics&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Monitoring&quot;},&quot;alertState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;healthy&quot;,&quot;degraded&quot;,&quot;critical&quot;],&quot;default&quot;:&quot;degraded&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Monitoring&quot;}}">
+class Component extends DCLogic {
+  state = {
+    route: "overview",
+    team: "Risk Intelligence",
+    wiz: 1,
+    form: { name: "Fraud Detection Platform v2", desc: "Real-time card-not-present fraud scoring for the payments gateway.", team: "Risk Intelligence", owner: "Ana Reyes", cc: "CC-4821", useCase: "Reduce chargeback loss by 18% at <60ms p95", workload: "Deep learning", classification: "Confidential", cpu: "CPU Standard (8 vCPU / 32 GiB)", gpu: "1 × NVIDIA A100 40GB", storage: "2 TiB", freq: "Daily", traffic: "1.2k req/s peak", slo: "60 ms p95", budget: "18,000" },
+    created: false,
+    projTab: "Overview",
+    jobTab: "Metrics",
+    job: null,
+    loss: null,
+    selRuns: ["run-41", "run-47"],
+    candidate: false,
+    approved: false,
+    deployed: false,
+    canary: 10,
+    rolledBack: false,
+    retraining: false,
+    queueTab: "Running",
+    toasts: [],
+  };
+
+  componentDidMount() {
+    this.loss = null;
+    this.timer = setInterval(() => {
+      const j = this.state.job;
+      if (!j || j.status !== "Running") return;
+      const pct = Math.min(100, j.pct + 3.5);
+      const epoch = Math.max(1, Math.round((pct / 100) * 40));
+      const done = pct >= 100;
+      const series = j.series.concat([j.series[j.series.length - 1] * (0.965 + Math.random() * 0.02)]).slice(-40);
+      this.setState({ job: Object.assign({}, j, { pct, epoch, series, elapsed: j.elapsed + 46, cost: j.cost + 0.62, status: done ? "Completed" : "Running" }) });
+      if (done) this.toast("Training job completed", "fraud-xgb-dl-0731 finished in 1h 12m · val AUC 0.9871", "oklch(0.62 0.14 152)");
+    }, 1400);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  toast(title, body, color) {
+    const t = { id: Math.random().toString(36).slice(2), title, body, color: color || "oklch(0.62 0.16 258)" };
+    this.setState((s) => ({ toasts: s.toasts.concat([t]) }));
+    setTimeout(() => this.setState((s) => ({ toasts: s.toasts.filter((x) => x.id !== t.id) })), 4200);
+  }
+  go(route) { return () => this.setState({ route }); }
+  set(k) { return (e) => this.setState((s) => ({ form: Object.assign({}, s.form, { [k]: e.target.value }) })); }
+
+  // ---------- chart helpers ----------
+  seq(n, fn) { const a = []; for (let i = 0; i < n; i++) a.push(fn(i)); return a; }
+  line(vals, w, h) {
+    const mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), r = (mx - mn) || 1;
+    return vals.map((v, i) => (i ? "L" : "M") + (i / (vals.length - 1) * w).toFixed(1) + "," + (h - 4 - ((v - mn) / r) * (h - 12)).toFixed(1)).join(" ");
+  }
+  area(vals, w, h) { return this.line(vals, w, h) + " L" + w + "," + h + " L0," + h + " Z"; }
+  chart(title, vals, value, color) {
+    return { title, value, color, d: this.line(vals, 280, 70), a: this.area(vals, 280, 70), id: title };
+  }
+
+  okList(list) { return list.map((x) => Object.assign({}, x, { mark: x.ok ? "PASS" : "CHECK", tone: x.ok ? "oklch(0.55 0.13 152)" : "oklch(0.62 0.15 72)", bg: x.ok ? "#f0f9f3" : "#fdf8ee", bd: x.ok ? "#cde9d7" : "#f0dfba" })); }
+  // ---------- data ----------
+  projects() {
+    return [
+      { id: "fraud", name: "Fraud Detection Platform", team: "Risk Intelligence", type: "Deep learning", models: "12", endpoints: "2", spend: "$11,240", budget: "$18,000", status: "Healthy", color: "oklch(0.62 0.14 152)" },
+      { id: "reco", name: "Product Recommendation Engine", team: "Growth ML", type: "Traditional ML", models: "8", endpoints: "3", spend: "$7,905", budget: "$12,000", status: "Healthy", color: "oklch(0.62 0.14 152)" },
+      { id: "churn", name: "Customer Churn Predictor", team: "Lifecycle", type: "Traditional ML", models: "5", endpoints: "1", spend: "$2,180", budget: "$4,000", status: "Drift", color: "oklch(0.7 0.15 72)" },
+      { id: "llm", name: "Support Assistant LLM", team: "Service AI", type: "LLM fine-tuning", models: "4", endpoints: "1", spend: "$28,640", budget: "$30,000", status: "Budget risk", color: "oklch(0.58 0.19 25)" },
+    ];
+  }
+
+  renderVals() {
+    const s = this.state, P = this.props;
+    const alertState = P.alertState || "degraded";
+    const nav = [
+      ["overview", "Overview", ""], ["projects", "Projects", "4"], ["workspaces", "Workspaces", "4"],
+      ["datasets", "Datasets", "5"], ["pipelines", "Pipelines", ""], ["jobs", "Training Jobs", "7"],
+      ["experiments", "Experiments", ""], ["models", "Models", "3"], ["deployments", "Deployments", "7"],
+      ["monitoring", "Monitoring", s.rolledBack ? "" : "2"], ["gpu", "GPU Capacity", ""], ["cost", "Cost and Usage", ""],
+      ["admin", "Administration", ""], ["architecture", "Architecture", ""],
+    ];
+    const groupOf = { newproject: "projects", project: "projects", dataset: "datasets", newjob: "jobs", job: "jobs", model: "models", approve: "models", deploy: "deployments", deployment: "deployments" };
+    const activeNav = groupOf[s.route] || s.route;
+
+    const crumbTrail = {
+      overview: ["Platform", "Overview"], projects: ["Platform", "Projects"], newproject: ["Projects", "Create ML project"],
+      project: ["Projects", "Fraud Detection Platform"], workspaces: ["Platform", "Workspaces"], datasets: ["Platform", "Datasets"],
+      dataset: ["Datasets", "fraud_txn_features"], pipelines: ["Platform", "Pipelines"], jobs: ["Platform", "Training jobs"],
+      newjob: ["Training jobs", "Submit job"], job: ["Training jobs", "fraud-xgb-dl-0731"], experiments: ["Platform", "Experiments"],
+      models: ["Platform", "Model registry"], model: ["Models", "fraud-detector v14"], approve: ["Models", "fraud-detector v14", "Approval"],
+      deployments: ["Platform", "Deployments"], deploy: ["Deployments", "New endpoint"], deployment: ["Deployments", "fraud-detector-prod"],
+      monitoring: ["Platform", "Production monitoring"], gpu: ["Platform", "GPU capacity"], cost: ["Platform", "Cost and usage"],
+      admin: ["Platform", "Administration"], architecture: ["Platform", "Architecture"],
+    }[s.route] || ["Platform"];
+
+    const alerts = s.rolledBack ? [] : [
+      { id: "a1", sev: "Critical", title: "P95 latency above SLO", body: "fraud-detector-prod · 128 ms vs 60 ms target · candidate v14 canary", color: "oklch(0.58 0.19 25)", bg: "#fdf1f0", bd: "#f4d3ce" },
+      { id: "a2", sev: "Warning", title: "Feature drift detected", body: "churn_features · PSI 0.27 on tenure_months (threshold 0.2)", color: "oklch(0.66 0.15 72)", bg: "#fdf8ee", bd: "#f0dfba" },
+    ];
+
+    const job = s.job || { name: "fraud-xgb-dl-0731", status: "Running", pct: 62, epoch: 25, elapsed: 2712, cost: 41.2, series: this.seq(24, (i) => 0.62 * Math.exp(-i / 7) + 0.055 + Math.sin(i) * 0.004) };
+    const mm = Math.floor(job.elapsed / 60), hh = Math.floor(mm / 60);
+    const loss = job.series;
+    const vloss = loss.map((v, i) => v * 1.09 + 0.006 * Math.sin(i / 2));
+    const acc = loss.map((v) => 0.998 - v * 0.06);
+
+    return {
+      team: s.team,
+      cycleTeam: () => this.setState({ team: s.team === "Risk Intelligence" ? "Growth ML" : s.team === "Growth ML" ? "Service AI" : "Risk Intelligence" }),
+      alertCount: alerts.length,
+      toasts: s.toasts,
+      nav: nav.map(([id, label, badge]) => ({
+        id, label, badge, onClick: this.go(id),
+        bg: activeNav === id ? "#eef1f5" : "transparent",
+        fg: activeNav === id ? "#151a21" : "#5b6472",
+        weight: activeNav === id ? "600" : "400",
+      })),
+      crumbs: crumbTrail.map((label, i) => ({
+        label, sep: i < crumbTrail.length - 1 ? "/" : "",
+        color: i === crumbTrail.length - 1 ? "#151a21" : "#6b7484",
+        cursor: i === crumbTrail.length - 1 ? "default" : "pointer",
+        onClick: i === crumbTrail.length - 1 ? undefined : this.go(activeNav === s.route ? "overview" : activeNav),
+      })),
+
+      isOverview: s.route === "overview", isProjects: s.route === "projects", isNewProject: s.route === "newproject",
+      isProject: s.route === "project", isWorkspaces: s.route === "workspaces", isDatasets: s.route === "datasets",
+      isDataset: s.route === "dataset", isPipelines: s.route === "pipelines", isJobs: s.route === "jobs",
+      isNewJob: s.route === "newjob", isJob: s.route === "job", isExperiments: s.route === "experiments",
+      isModels: s.route === "models", isModel: s.route === "model", isApprove: s.route === "approve",
+      isDeployments: s.route === "deployments", isDeploy: s.route === "deploy", isDeployment: s.route === "deployment",
+      isMonitoring: s.route === "monitoring", isGpu: s.route === "gpu", isCost: s.route === "cost",
+      isAdmin: s.route === "admin", isArch: s.route === "architecture",
+
+      goOverview: this.go("overview"), goProjects: this.go("projects"), goNewProject: () => this.setState({ route: "newproject", wiz: 1, created: false }),
+      goProject: this.go("project"), goWorkspaces: this.go("workspaces"), goDatasets: this.go("datasets"), goDataset: this.go("dataset"),
+      goJobs: this.go("jobs"), goNewJob: this.go("newjob"), goJob: this.go("job"), goExperiments: this.go("experiments"),
+      goModels: this.go("models"), goModel: this.go("model"), goApprove: this.go("approve"), goDeployments: this.go("deployments"),
+      goDeploy: this.go("deploy"), goDeployment: this.go("deployment"), goMonitoring: this.go("monitoring"),
+      goGpu: this.go("gpu"), goCost: this.go("cost"), goArch: this.go("architecture"), goPipelines: this.go("pipelines"),
+
+      // ---- overview ----
+      summary: [
+        { k: "Active projects", v: "4", d: "+1 this month", color: "#6b7484" },
+        { k: "Running training jobs", v: "3", d: "2 queued · 1 preempted", color: "#6b7484" },
+        { k: "Production endpoints", v: "7", d: "6 healthy · 1 degraded", color: "oklch(0.58 0.19 25)" },
+        { k: "GPU utilisation", v: "78%", d: "124 of 160 GPUs allocated", color: "#6b7484" },
+        { k: "Monthly platform cost", v: "$49,965", d: "68% of $73,000 budget", color: "#6b7484" },
+        { k: "Models needing attention", v: "3", d: "1 drift · 1 approval · 1 stale", color: "oklch(0.66 0.15 72)" },
+      ],
+      activity: [
+        { t: "4m ago", k: "Training completed", d: "fraud-xgb-dl-0731 · val AUC 0.9871 · 1h 12m · $47.10", tone: "oklch(0.62 0.14 152)" },
+        { t: "12m ago", k: "Model registered", d: "fraud-detector v14 · candidate · from run-47", tone: "oklch(0.62 0.16 258)" },
+        { t: "38m ago", k: "Deployment promoted", d: "reco-ranker-prod v9 → 100% traffic (blue-green)", tone: "oklch(0.62 0.16 258)" },
+        { t: "51m ago", k: "Latency alert", d: "fraud-detector-prod p95 128 ms > 60 ms SLO", tone: "oklch(0.58 0.19 25)" },
+        { t: "2h ago", k: "Dataset version", d: "fraud_txn_features v37 · 42.1M records · quality 96", tone: "#6b7484" },
+        { t: "3h ago", k: "Retraining started", d: "churn-predictor drift pipeline · triggered by monitor", tone: "oklch(0.66 0.15 72)" },
+      ],
+      health: [
+        { k: "Training cluster", v: "Healthy", d: "42 nodes · Kueue admitting", ok: true },
+        { k: "Inference cluster", v: "Degraded", d: "1 of 7 endpoints breaching SLO", ok: false },
+        { k: "GPU nodes available", v: "36 / 42", d: "4 draining · 2 unhealthy", ok: true },
+        { k: "Queued jobs", v: "2", d: "median wait 6m 40s", ok: true },
+        { k: "Production SLO", v: "99.2%", d: "target 99.5% · 30-day window", ok: false },
+      ],
+      quickActions: [
+        { label: "Create Project", onClick: () => this.setState({ route: "newproject", wiz: 1, created: false }), primary: "oklch(0.52 0.15 258)", fg: "#fff", bd: "oklch(0.52 0.15 258)" },
+        { label: "Start Training", onClick: this.go("newjob"), primary: "#fff", fg: "#151a21", bd: "#dfe3e9" },
+        { label: "Register Model", onClick: this.go("experiments"), primary: "#fff", fg: "#151a21", bd: "#dfe3e9" },
+        { label: "Deploy Endpoint", onClick: this.go("deploy"), primary: "#fff", fg: "#151a21", bd: "#dfe3e9" },
+        { label: "Open Workspace", onClick: this.go("workspaces"), primary: "#fff", fg: "#151a21", bd: "#dfe3e9" },
+      ],
+      utilChart: this.chart("Cluster GPU utilisation · 24h", this.seq(48, (i) => 62 + 18 * Math.sin(i / 6) + (i % 5)), "78%", "oklch(0.62 0.16 258)"),
+      costChart: this.chart("Daily platform spend · 30d", this.seq(30, (i) => 1200 + 380 * Math.sin(i / 4) + i * 9), "$1,742", "oklch(0.62 0.14 152)"),
+
+      // ---- projects ----
+      projects: this.projects().map((p) => Object.assign({}, p, { onClick: this.go("project") })),
+
+      // ---- wizard ----
+      wiz: s.wiz, created: s.created, notCreated: !s.created,
+      wizSteps: [1, 2, 3, 4, 5].map((n) => ({
+        n: String(n),
+        label: ["Project information", "Workload type", "Data classification", "Resource requirements", "Review and create"][n - 1],
+        bg: s.wiz === n ? "oklch(0.52 0.15 258)" : s.wiz > n ? "oklch(0.62 0.14 152)" : "#eceff3",
+        fg: s.wiz >= n ? "#fff" : "#8b94a3",
+        labelColor: s.wiz === n ? "#151a21" : "#6b7484",
+        weight: s.wiz === n ? "600" : "400",
+      })),
+      isW1: s.wiz === 1, isW2: s.wiz === 2, isW3: s.wiz === 3, isW4: s.wiz === 4, isW5: s.wiz === 5,
+      wizNext: () => this.setState({ wiz: Math.min(5, s.wiz + 1) }),
+      wizBack: () => this.setState({ wiz: Math.max(1, s.wiz - 1) }),
+      wizCreate: () => { this.setState({ created: true }); this.toast("Project created", s.form.name + " · namespace, quota, repo and registry provisioned", "oklch(0.62 0.14 152)"); },
+      f: s.form,
+      setName: this.set("name"), setDesc: this.set("desc"), setTeam: this.set("team"), setOwner: this.set("owner"),
+      setCc: this.set("cc"), setUseCase: this.set("useCase"), setBudget: this.set("budget"), setStorage: this.set("storage"),
+      setCpu: this.set("cpu"), setGpu: this.set("gpu"), setFreq: this.set("freq"), setTraffic: this.set("traffic"), setSlo: this.set("slo"),
+      workloads: ["Traditional machine learning", "Deep learning", "LLM fine-tuning", "Online inference", "Batch inference", "Data-processing pipeline"].map((w) => ({
+        label: w, desc: { "Traditional machine learning": "XGBoost, LightGBM, scikit-learn · CPU pools", "Deep learning": "PyTorch / TensorFlow · single or multi-GPU", "LLM fine-tuning": "NeMo, PEFT · multi-node GPU + NVLink", "Online inference": "Low-latency KServe endpoints", "Batch inference": "Scheduled batch scoring jobs", "Data-processing pipeline": "Feature engineering pipelines" }[w],
+        bd: s.form.workload === w ? "oklch(0.52 0.15 258)" : "#e4e7ec", bg: s.form.workload === w ? "#f2f6ff" : "#fff",
+        onClick: () => this.setState({ form: Object.assign({}, s.form, { workload: w }) }),
+      })),
+      classes: ["Public", "Internal", "Confidential", "Restricted"].map((c) => ({
+        label: c, desc: { Public: "No restrictions · open datasets", Internal: "Employees only · standard audit", Confidential: "PII / PCI · encryption + approval gate", Restricted: "Regulated · dedicated nodes, no egress" }[c],
+        bd: s.form.classification === c ? "oklch(0.52 0.15 258)" : "#e4e7ec", bg: s.form.classification === c ? "#f2f6ff" : "#fff",
+        onClick: () => this.setState({ form: Object.assign({}, s.form, { classification: c }) }),
+      })),
+      provisioned: [
+        { k: "Git repository", v: "github.com/acme-ml/fraud-detection-platform-v2" },
+        { k: "Kubernetes namespace", v: "ml-fraud-detection-v2" },
+        { k: "Service account", v: "sa-fraud-detection-v2 (IRSA bound)" },
+        { k: "Resource quota", v: "64 vCPU · 256 GiB · 4 A100 · 2 TiB" },
+        { k: "Object storage", v: "s3://acme-ml-artifacts/fraud-detection-v2/" },
+        { k: "MLflow experiment", v: "exp-fraud-detection-v2" },
+        { k: "Model registry entry", v: "registry/fraud-detection-v2" },
+        { k: "Monitoring dashboard", v: "grafana/d/ml-fraud-v2" },
+        { k: "GitOps directory", v: "gitops/clusters/prod/ml-fraud-detection-v2/" },
+      ],
+
+      // ---- project dashboard ----
+      projTab: s.projTab,
+      projTabs: ["Overview", "Data", "Training", "Experiments", "Models", "Deployments", "Monitoring", "Settings"].map((t) => ({
+        label: t, onClick: () => this.setState({ projTab: t }),
+        bd: s.projTab === t ? "oklch(0.52 0.15 258)" : "transparent",
+        color: s.projTab === t ? "#151a21" : "#6b7484",
+        weight: s.projTab === t ? "600" : "400",
+      })),
+      projFacts: [
+        { k: "Owner", v: "Ana Reyes" }, { k: "Team", v: "Risk Intelligence" }, { k: "Environment", v: "prod · eu-west-1" },
+        { k: "Monthly budget", v: "$18,000 · $11,240 used" }, { k: "Production model", v: "fraud-detector v13" },
+        { k: "Latest dataset", v: "fraud_txn_features v37" }, { k: "Latest training run", v: "run-47 · completed" },
+        { k: "Endpoint status", v: "Degraded · p95 128 ms" },
+      ],
+      lifecycle: [
+        { k: "Data", v: "v37 fresh", tone: "oklch(0.62 0.14 152)", bg: "#f0f9f3" },
+        { k: "Train", v: "run-47 done", tone: "oklch(0.62 0.14 152)", bg: "#f0f9f3" },
+        { k: "Evaluate", v: "AUC 0.9871", tone: "oklch(0.62 0.14 152)", bg: "#f0f9f3" },
+        { k: "Register", v: "v14 candidate", tone: "oklch(0.62 0.16 258)", bg: "#f2f6ff" },
+        { k: "Approve", v: s.approved ? "approved" : "1 gate open", tone: s.approved ? "oklch(0.62 0.14 152)" : "oklch(0.66 0.15 72)", bg: s.approved ? "#f0f9f3" : "#fdf8ee" },
+        { k: "Deploy", v: s.deployed ? "canary " + s.canary + "%" : "pending", tone: s.deployed ? "oklch(0.62 0.16 258)" : "#8b94a3", bg: s.deployed ? "#f2f6ff" : "#f6f7f9" },
+        { k: "Monitor", v: s.rolledBack ? "healthy" : "SLO breach", tone: s.rolledBack ? "oklch(0.62 0.14 152)" : "oklch(0.58 0.19 25)", bg: s.rolledBack ? "#f0f9f3" : "#fdf1f0" },
+        { k: "Retrain", v: s.retraining ? "running" : "scheduled", tone: s.retraining ? "oklch(0.62 0.16 258)" : "#8b94a3", bg: s.retraining ? "#f2f6ff" : "#f6f7f9" },
+      ],
+
+      // ---- workspaces ----
+      wsProfiles: [
+        { k: "CPU Small", cpu: "4 vCPU", mem: "16 GiB", gpu: "—", n: "0", cost: "$0.21/h", avail: "Available", tone: "oklch(0.62 0.14 152)" },
+        { k: "CPU Memory Optimized", cpu: "16 vCPU", mem: "128 GiB", gpu: "—", n: "0", cost: "$0.94/h", avail: "Available", tone: "oklch(0.62 0.14 152)" },
+        { k: "GPU Development", cpu: "8 vCPU", mem: "64 GiB", gpu: "T4", n: "1", cost: "$1.12/h", avail: "Available", tone: "oklch(0.62 0.14 152)" },
+        { k: "Single-GPU Training", cpu: "12 vCPU", mem: "96 GiB", gpu: "A100 40GB", n: "1", cost: "$3.40/h", avail: "Limited (3 left)", tone: "oklch(0.66 0.15 72)" },
+        { k: "Multi-GPU Training", cpu: "48 vCPU", mem: "384 GiB", gpu: "A100 80GB", n: "4", cost: "$13.60/h", avail: "Queue 8m", tone: "oklch(0.66 0.15 72)" },
+        { k: "LLM Fine-Tuning", cpu: "96 vCPU", mem: "1.1 TiB", gpu: "H100 80GB", n: "8", cost: "$38.20/h", avail: "Reserved pool", tone: "oklch(0.62 0.16 258)" },
+      ].map((p) => Object.assign({}, p, { start: () => this.toast("Workspace starting", p.k + " · scheduling pod, ~40s", "oklch(0.62 0.16 258)") })),
+      wsActive: [
+        { owner: "Ana Reyes", proj: "Fraud Detection Platform", rt: "GPU Development · T4", age: "3h 12m", cost: "$3.58", idle: "0m", status: "Running", tone: "oklch(0.62 0.14 152)" },
+        { owner: "Dev Patel", proj: "Support Assistant LLM", rt: "LLM Fine-Tuning · 8×H100", age: "11h 04m", cost: "$422.80", idle: "48m", status: "Idle warning", tone: "oklch(0.66 0.15 72)" },
+        { owner: "Mira Osei", proj: "Customer Churn Predictor", rt: "CPU Memory Optimized", age: "1d 2h", cost: "$24.10", idle: "6m", status: "Running", tone: "oklch(0.62 0.14 152)" },
+        { owner: "Tomas Lind", proj: "Product Recommendation Engine", rt: "Single-GPU Training", age: "22m", cost: "$1.24", idle: "0m", status: "Starting", tone: "oklch(0.62 0.16 258)" },
+      ].map((w) => Object.assign({}, w, { stop: () => this.toast("Workspace stopped", w.owner + " · " + w.rt + " released", "#8b94a3") })),
+
+      // ---- datasets ----
+      datasets: [
+        { k: "fraud_txn_features", v: "v37", owner: "Risk Intelligence", size: "412 GiB", rec: "42.1M", cls: "Confidential", q: "96 · Passed", upd: "2h ago", tone: "oklch(0.62 0.14 152)" },
+        { k: "churn_features", v: "v12", owner: "Lifecycle", size: "38 GiB", rec: "3.4M", cls: "Internal", q: "81 · Drift", upd: "1d ago", tone: "oklch(0.66 0.15 72)" },
+        { k: "catalog_interactions", v: "v88", owner: "Growth ML", size: "1.8 TiB", rec: "612M", cls: "Internal", q: "94 · Passed", upd: "6h ago", tone: "oklch(0.62 0.14 152)" },
+        { k: "support_transcripts", v: "v5", owner: "Service AI", size: "204 GiB", rec: "9.2M", cls: "Restricted", q: "89 · Review", upd: "3d ago", tone: "oklch(0.66 0.15 72)" },
+        { k: "merchant_reference", v: "v3", owner: "Risk Intelligence", size: "2.1 GiB", rec: "184k", cls: "Internal", q: "99 · Passed", upd: "2w ago", tone: "oklch(0.62 0.14 152)" },
+      ].map((d) => Object.assign({}, d, { onClick: this.go("dataset") })),
+      schema: [
+        { c: "txn_id", t: "string", n: "0%", note: "primary key" },
+        { c: "amount_eur", t: "double", n: "0%", note: "p99 1,842.00" },
+        { c: "merchant_mcc", t: "int", n: "0.2%", note: "412 distinct" },
+        { c: "device_fingerprint", t: "string", n: "3.1%", note: "hashed" },
+        { c: "velocity_1h", t: "double", n: "0%", note: "engineered" },
+        { c: "geo_mismatch", t: "boolean", n: "0%", note: "engineered" },
+        { c: "is_fraud", t: "boolean", n: "0%", note: "label · 1.84% positive" },
+      ],
+      lineage: [
+        { k: "raw.payments_authorisations", v: "Kafka sink · hourly" },
+        { k: "→ dbt: stg_transactions", v: "commit 8ac31f2" },
+        { k: "→ feature job: velocity_windows", v: "Spark 3.5 · run 9182" },
+        { k: "→ fraud_txn_features v37", v: "registered 2h ago by Ana Reyes" },
+      ],
+      newVersion: () => this.toast("Dataset version queued", "fraud_txn_features v38 · profiling + quality checks started", "oklch(0.62 0.16 258)"),
+
+      // ---- training submit ----
+      frameworks: ["PyTorch", "TensorFlow", "XGBoost", "Scikit-learn", "NeMo", "Custom container"],
+      computeProfiles: ["CPU Standard", "One NVIDIA GPU", "Four NVIDIA GPUs", "Eight-GPU Distributed", "MIG Small", "Spot GPU Training"],
+      hyper: [
+        { k: "learning_rate", v: "3e-4" }, { k: "batch_size", v: "512" }, { k: "max_epochs", v: "40" },
+        { k: "weight_decay", v: "0.01" }, { k: "early_stopping_patience", v: "5" }, { k: "scale_pos_weight", v: "23.4" },
+      ],
+      estimates: [
+        { k: "Estimated queue time", v: "6m 40s", d: "priority high · 4 A100 requested" },
+        { k: "Estimated duration", v: "1h 10m – 1h 25m", d: "based on 6 similar runs" },
+        { k: "Estimated cost", v: "$46.80", d: "$13.60/h · 4×A100 80GB" },
+        { k: "Available GPU capacity", v: "36 GPUs", d: "12 in reserved pool" },
+      ],
+      policies: this.okList([
+        { k: "Quota within team limit", ok: true, d: "4 of 16 A100 allowed" },
+        { k: "Dataset classification allowed", ok: true, d: "Confidential → encrypted node pool" },
+        { k: "Image signed and scanned", ok: true, d: "cosign verified · 0 critical CVE" },
+        { k: "Max runtime under policy", ok: true, d: "4h requested · 12h cap" },
+        { k: "Budget headroom", ok: false, d: "project at 62% of monthly budget — warning only" },
+      ]),
+      submitJob: () => {
+        this.setState({ route: "job", job: { name: "fraud-xgb-dl-0731", status: "Running", pct: 4, epoch: 2, elapsed: 96, cost: 1.4, series: this.seq(6, (i) => 0.62 * Math.exp(-i / 7) + 0.055) } });
+        this.toast("Training job submitted", "fraud-xgb-dl-0731 admitted by Kueue · 4×A100", "oklch(0.62 0.16 258)");
+      },
+
+      // ---- job detail ----
+      job: {
+        name: job.name, status: job.status, pct: job.pct.toFixed(0) + "%", barW: job.pct.toFixed(0) + "%",
+        epoch: job.epoch + " / 40", elapsed: (hh ? hh + "h " : "") + (mm % 60) + "m", eta: job.status === "Completed" ? "—" : Math.max(1, Math.round((100 - job.pct) * 0.72)) + "m",
+        cost: "$" + job.cost.toFixed(2), tone: job.status === "Completed" ? "oklch(0.62 0.14 152)" : "oklch(0.62 0.16 258)",
+        bg: job.status === "Completed" ? "#f0f9f3" : "#f2f6ff",
+      },
+      jobFacts: [
+        { k: "GPU allocation", v: "4 × A100 80GB · node pool gpu-a100-eu1" },
+        { k: "Dataset version", v: "fraud_txn_features v37" },
+        { k: "Git commit", v: "8ac31f2 · main" },
+        { k: "Image digest", v: "sha256:4f19c0…a72b (pytorch-2.3-cu124)" },
+        { k: "Kueue workload", v: "wl-fraud-0731 · localQueue risk-high" },
+        { k: "Checkpoint interval", v: "every 5 epochs → s3://…/ckpt/" },
+      ],
+      jobTab: s.jobTab,
+      jobTabs: ["Metrics", "Logs", "Resources", "Checkpoints", "Artifacts", "Events", "Configuration"].map((t) => ({
+        label: t, onClick: () => this.setState({ jobTab: t }),
+        bd: s.jobTab === t ? "oklch(0.52 0.15 258)" : "transparent",
+        color: s.jobTab === t ? "#151a21" : "#6b7484", weight: s.jobTab === t ? "600" : "400",
+      })),
+      isJobMetrics: s.jobTab === "Metrics", isJobLogs: s.jobTab === "Logs", isJobOther: !["Metrics", "Logs"].includes(s.jobTab),
+      jobOtherLabel: s.jobTab,
+      jobCharts: [
+        this.chart("Training loss", loss, loss[loss.length - 1].toFixed(4), "oklch(0.52 0.15 258)"),
+        this.chart("Validation loss", vloss, vloss[vloss.length - 1].toFixed(4), "oklch(0.58 0.19 25)"),
+        this.chart("Validation AUC", acc, acc[acc.length - 1].toFixed(4), "oklch(0.62 0.14 152)"),
+        this.chart("Samples / second", this.seq(24, (i) => 18400 + 900 * Math.sin(i / 3)), "18.9k", "oklch(0.52 0.15 258)"),
+        this.chart("GPU utilisation", this.seq(24, (i) => 91 + 6 * Math.sin(i / 2)), "94%", "oklch(0.62 0.16 258)"),
+        this.chart("GPU memory", this.seq(24, (i) => 68 + 9 * Math.sin(i / 4)), "71.4 GiB", "oklch(0.66 0.15 72)"),
+        this.chart("Power draw (W/GPU)", this.seq(24, (i) => 372 + 22 * Math.sin(i / 2.5)), "381 W", "oklch(0.66 0.15 72)"),
+        this.chart("Learning rate", this.seq(24, (i) => 3e-4 * Math.exp(-i / 18)), "1.9e-4", "#8b94a3"),
+      ],
+      logLines: [
+        "[12:41:02] INFO  kueue: workload wl-fraud-0731 admitted (quota risk-high)",
+        "[12:41:19] INFO  torchrun: initialising process group nccl world_size=4",
+        "[12:41:44] INFO  data: loaded fraud_txn_features v37 (42,118,904 rows) shards=64",
+        "[12:42:03] INFO  train: epoch 1/40 loss=0.6193 auc=0.9412 samples/s=18,204",
+        "[12:52:31] INFO  ckpt: wrote s3://acme-ml-artifacts/fraud/ckpt/epoch-5.pt (1.4 GiB)",
+        "[13:04:58] WARN  dcgm: gpu2 temperature 81C (throttle threshold 84C)",
+        "[13:18:12] INFO  train: epoch 25/40 loss=0.0731 val_loss=0.0812 val_auc=0.9864",
+        "[13:18:12] INFO  mlflow: logged 14 metrics to run-47",
+      ],
+      jobActions: [
+        { label: "Stop job", onClick: () => { this.setState({ job: Object.assign({}, job, { status: "Stopped" }) }); this.toast("Job stopped", "SIGTERM sent · checkpoint epoch " + job.epoch + " preserved", "oklch(0.58 0.19 25)"); } },
+        { label: "Change priority", onClick: () => this.toast("Priority updated", "fraud-xgb-dl-0731 → critical (preempts 1 low job)", "oklch(0.66 0.15 72)") },
+        { label: "Clone job", onClick: this.go("newjob") },
+        { label: "Resume from checkpoint", onClick: () => this.toast("Resuming", "Restored epoch " + job.epoch + " checkpoint on 4×A100", "oklch(0.62 0.16 258)") },
+        { label: "Open experiment", onClick: this.go("experiments") },
+      ],
+
+      // ---- queue + gpu ----
+      queueTab: s.queueTab,
+      queueTabs: ["Running", "Pending", "Completed", "Failed"].map((t) => ({
+        label: t, onClick: () => this.setState({ queueTab: t }),
+        bg: s.queueTab === t ? "#151a21" : "#fff", fg: s.queueTab === t ? "#fff" : "#4b5563", bd: s.queueTab === t ? "#151a21" : "#dfe3e9",
+      })),
+      queueJobs: {
+        Running: [
+          { k: "fraud-xgb-dl-0731", team: "Risk Intelligence", pri: "High", gpus: "4 × A100", wait: "6m 40s", rt: "45m", status: "Running", tone: "oklch(0.62 0.16 258)" },
+          { k: "llm-sft-support-v4", team: "Service AI", pri: "Critical", gpus: "8 × H100", wait: "0s", rt: "11h 04m", status: "Running", tone: "oklch(0.62 0.16 258)" },
+          { k: "reco-two-tower-091", team: "Growth ML", pri: "Normal", gpus: "2 × A100", wait: "18m", rt: "2h 12m", status: "Running", tone: "oklch(0.62 0.16 258)" },
+        ],
+        Pending: [
+          { k: "churn-retrain-0730", team: "Lifecycle", pri: "Normal", gpus: "1 × A100", wait: "8m 20s", rt: "—", status: "Queued", tone: "oklch(0.66 0.15 72)" },
+          { k: "reco-hpo-sweep-14", team: "Growth ML", pri: "Low", gpus: "4 × A100", wait: "34m", rt: "—", status: "Quota wait", tone: "oklch(0.66 0.15 72)" },
+        ],
+        Completed: [
+          { k: "fraud-xgb-dl-0730", team: "Risk Intelligence", pri: "High", gpus: "4 × A100", wait: "3m", rt: "1h 08m", status: "Completed", tone: "oklch(0.62 0.14 152)" },
+          { k: "reco-two-tower-090", team: "Growth ML", pri: "Normal", gpus: "2 × A100", wait: "12m", rt: "1h 54m", status: "Completed", tone: "oklch(0.62 0.14 152)" },
+        ],
+        Failed: [
+          { k: "llm-sft-support-v3", team: "Service AI", pri: "Critical", gpus: "8 × H100", wait: "0s", rt: "26m", status: "OOM killed", tone: "oklch(0.58 0.19 25)" },
+          { k: "churn-retrain-0728", team: "Lifecycle", pri: "Normal", gpus: "1 × A100", wait: "5m", rt: "3m", status: "Image pull error", tone: "oklch(0.58 0.19 25)" },
+        ],
+      }[s.queueTab],
+      gpuPools: [
+        { k: "gpu-a100-eu1", model: "A100 80GB SXM", total: "64", alloc: "52", free: "8", res: "4", bad: "0", pct: "81%" },
+        { k: "gpu-a100-40-eu1", model: "A100 40GB PCIe", total: "32", alloc: "21", free: "9", res: "2", bad: "0", pct: "66%" },
+        { k: "gpu-h100-eu1", model: "H100 80GB SXM", total: "32", alloc: "30", free: "0", res: "0", bad: "2", pct: "94%" },
+        { k: "gpu-t4-dev", model: "T4 16GB", total: "24", alloc: "14", free: "10", res: "0", bad: "0", pct: "58%" },
+        { k: "mig-a100-1g10gb", model: "A100 MIG 1g.10gb", total: "8", alloc: "7", free: "1", res: "0", bad: "0", pct: "88%" },
+      ],
+      clusterMap: this.seq(160, (i) => ({
+        id: "g" + i,
+        bg: i % 37 === 5 ? "oklch(0.58 0.19 25)" : i % 11 === 3 ? "#e7ebf0" : i % 9 === 0 ? "oklch(0.72 0.11 258)" : "oklch(0.62 0.16 258)",
+      })),
+
+      // ---- experiments ----
+      runs: [
+        { id: "run-41", name: "run-41 · xgb-baseline", model: "XGBoost", ds: "v36", commit: "1c9be04", auc: "0.9721", f1: "0.812", time: "18m", cost: "$4.10", status: "Completed", best: false },
+        { id: "run-44", name: "run-44 · deep-wide", model: "PyTorch MLP", ds: "v36", commit: "5da7719", auc: "0.9803", f1: "0.841", time: "52m", cost: "$21.60", status: "Completed", best: false },
+        { id: "run-45", name: "run-45 · deep-wide+focal", model: "PyTorch MLP", ds: "v37", commit: "7bb1042", auc: "0.9841", f1: "0.858", time: "58m", cost: "$24.90", status: "Completed", best: false },
+        { id: "run-46", name: "run-46 · gbdt-ensemble", model: "XGBoost", ds: "v37", commit: "8ac31f2", auc: "0.9832", f1: "0.851", time: "24m", cost: "$6.40", status: "Completed", best: false },
+        { id: "run-47", name: "run-47 · deep-wide+focal+cal", model: "PyTorch MLP", ds: "v37", commit: "8ac31f2", auc: "0.9871", f1: "0.874", time: "1h 12m", cost: "$47.10", status: "Completed", best: true },
+        { id: "run-48", name: "run-48 · transformer-seq", model: "PyTorch TFT", ds: "v37", commit: "8ac31f2", auc: "0.9858", f1: "0.869", time: "3h 04m", cost: "$118.40", status: "Completed", best: false },
+      ].map((r) => Object.assign({}, r, {
+        sel: s.selRuns.includes(r.id),
+        bg: s.selRuns.includes(r.id) ? "#f2f6ff" : "#fff",
+        mark: r.best ? "★ best candidate" : "",
+        toggle: () => this.setState({ selRuns: s.selRuns.includes(r.id) ? s.selRuns.filter((x) => x !== r.id) : s.selRuns.concat([r.id]) }),
+      })),
+      selCount: s.selRuns.length,
+      compareBars: [
+        { k: "Validation AUC", a: "0.9721", b: "0.9871", wa: "78%", wb: "100%" },
+        { k: "F1 score", a: "0.812", b: "0.874", wa: "82%", wb: "100%" },
+        { k: "p95 latency", a: "8 ms", b: "23 ms", wa: "35%", wb: "100%" },
+        { k: "Model size", a: "14 MiB", b: "212 MiB", wa: "7%", wb: "100%" },
+        { k: "Training cost", a: "$4.10", b: "$47.10", wa: "9%", wb: "100%" },
+      ],
+      promote: () => { this.setState({ candidate: true, route: "model" }); this.toast("Model candidate registered", "fraud-detector v14 from run-47 · stage: candidate", "oklch(0.62 0.16 258)"); },
+
+      // ---- model registry ----
+      candidate: s.candidate, approved: s.approved, deployed: s.deployed,
+      models: [
+        { k: "fraud-detector", v: "v14", stage: s.approved ? "Approved" : "Candidate", fw: "PyTorch 2.3", q: "0.9871 AUC", owner: "Ana Reyes", dep: s.deployed ? "Canary " + s.canary + "%" : "Not deployed", upd: "12m ago", tone: s.approved ? "oklch(0.62 0.14 152)" : "oklch(0.62 0.16 258)" },
+        { k: "fraud-detector", v: "v13", stage: "Production", fw: "PyTorch 2.3", q: "0.9832 AUC", owner: "Ana Reyes", dep: s.rolledBack ? "100% traffic" : (100 - s.canary) + "% traffic", upd: "9d ago", tone: "oklch(0.62 0.14 152)" },
+        { k: "reco-ranker", v: "v9", stage: "Production", fw: "XGBoost 2.0", q: "0.712 NDCG", owner: "Tomas Lind", dep: "100% traffic", upd: "38m ago", tone: "oklch(0.62 0.14 152)" },
+        { k: "churn-predictor", v: "v6", stage: "Staging", fw: "LightGBM", q: "0.781 AUC", owner: "Mira Osei", dep: "Staging", upd: "3h ago", tone: "oklch(0.66 0.15 72)" },
+        { k: "support-assistant", v: "v4", stage: "Candidate", fw: "NeMo / Llama 3 8B", q: "7.9 MT-bench", owner: "Dev Patel", dep: "Shadow", upd: "1d ago", tone: "oklch(0.62 0.16 258)" },
+        { k: "fraud-detector", v: "v11", stage: "Archived", fw: "XGBoost 1.7", q: "0.9744 AUC", owner: "Ana Reyes", dep: "—", upd: "2mo ago", tone: "#8b94a3" },
+      ].map((m) => Object.assign({}, m, { onClick: this.go("model") })),
+      modelCard: [
+        { k: "Intended use", v: "Real-time authorisation fraud scoring, EU card-not-present traffic" },
+        { k: "Architecture", v: "Wide & deep MLP · 212 MiB · focal loss + isotonic calibration" },
+        { k: "Training lineage", v: "run-47 · commit 8ac31f2 · fraud_txn_features v37 · 4×A100 1h 12m" },
+        { k: "Evaluation", v: "AUC 0.9871 · F1 0.874 · recall@1%FPR 0.716 (v13: 0.681)" },
+        { k: "Security scan", v: "Passed · 0 critical, 2 low CVE · artifact signed (cosign)" },
+        { k: "Bias and safety", v: "Passed · max group FPR delta 1.8% (limit 3%) across 6 cohorts" },
+        { k: "Benchmarks", v: "p95 23 ms @ 1.2k rps on 1×A10G · 3.1 GiB GPU memory" },
+        { k: "Provenance", v: "SLSA level 3 attestation · in-toto chain verified" },
+      ],
+      approvalHistory: [
+        { who: "Automated gates", when: "12m ago", what: "7 of 8 gates passed · latency target flagged", tone: "oklch(0.66 0.15 72)" },
+        { who: "Ana Reyes (ML Engineer)", when: "9m ago", what: "Requested approval · attached canary plan 10%", tone: "oklch(0.62 0.16 258)" },
+        { who: "Model risk board", when: "—", what: s.approved ? "Approved for production (canary required)" : "Pending review", tone: s.approved ? "oklch(0.62 0.14 152)" : "#8b94a3" },
+      ],
+      gates: this.okList([
+        { k: "Minimum model quality", ok: true, d: "AUC 0.9871 ≥ 0.980 threshold" },
+        { k: "Regression comparison", ok: true, d: "+0.39% AUC vs production v13 · no cohort regression" },
+        { k: "Bias check", ok: true, d: "Max FPR delta 1.8% ≤ 3%" },
+        { k: "Security scan", ok: true, d: "0 critical CVE · signed artifact" },
+        { k: "Latency target", ok: false, d: "p95 23 ms ≤ 60 ms on A10G — waiver needed for CPU fallback path" },
+        { k: "Throughput target", ok: true, d: "1,240 rps ≥ 1,000 rps" },
+        { k: "Memory limit", ok: true, d: "3.1 GiB ≤ 8 GiB" },
+        { k: "Model provenance", ok: true, d: "SLSA L3 · lineage complete" },
+      ]),
+      approveModel: () => { this.setState({ approved: true, route: "deploy" }); this.toast("Model approved", "fraud-detector v14 approved for production · canary required", "oklch(0.62 0.14 152)"); },
+      rejectModel: () => this.toast("Model rejected", "fraud-detector v14 returned to candidate with comments", "oklch(0.58 0.19 25)"),
+      requestApproval: () => this.setState({ route: "approve" }),
+
+      // ---- deploy ----
+      runtimes: ["Triton Inference Server", "TensorRT", "TensorRT-LLM", "vLLM", "NVIDIA NIM", "Custom runtime"],
+      strategies: ["Rolling", "Canary", "Blue-green", "Shadow"],
+      deployChecks: this.okList([
+        { k: "Production approval", ok: s.approved, d: s.approved ? "Approved by model risk board" : "Model v14 not yet approved" },
+        { k: "GPU capacity", ok: true, d: "8 A10G available in inference pool" },
+        { k: "Policy checks", ok: true, d: "mTLS enforced · PCI namespace · audit logging on" },
+        { k: "Cost guardrail", ok: true, d: "$1,940/mo at min 2 replicas · within budget" },
+      ]),
+      deployEstimates: [
+        { k: "Estimated cost", v: "$1,940 / month" }, { k: "Expected throughput", v: "1,240 rps" },
+        { k: "Cold start", v: "38 s (Triton + TensorRT engine cached)" }, { k: "Traffic split", v: "v13 90% · v14 10%" },
+      ],
+      doDeploy: () => { this.setState({ deployed: true, route: "deployment", canary: 10, rolledBack: false }); this.toast("Deployment created", "fraud-detector-prod · canary 10% to v14 via GitOps", "oklch(0.62 0.16 258)"); },
+
+      // ---- deployment detail ----
+      canary: String(s.canary), prodPct: String(100 - s.canary),
+      canaryW: s.canary + "%", prodW: (100 - s.canary) + "%",
+      rolledBack: s.rolledBack,
+      depFacts: [
+        { k: "Endpoint URL", v: "https://infer.acme-ml.io/v1/fraud-detector/predict" },
+        { k: "Model versions", v: s.rolledBack ? "v13 (100%)" : "v13 (" + (100 - s.canary) + "%) · v14 (" + s.canary + "%)" },
+        { k: "Runtime", v: "Triton 24.05 + TensorRT · KServe InferenceService" },
+        { k: "Replicas", v: "6 of max 12 · HPA on concurrency" },
+        { k: "GPU profile", v: "1 × A10G per replica (MIG disabled)" },
+        { k: "Status", v: s.rolledBack ? "Healthy" : "Degraded · canary breaching latency SLO" },
+      ],
+      depActions: [
+        { label: "Increase canary traffic", onClick: () => { const c = Math.min(100, s.canary + 15); this.setState({ canary: c, rolledBack: false }); this.toast("Canary traffic increased", "v14 now at " + c + "% · watching p95 for 5m", "oklch(0.62 0.16 258)"); } },
+        { label: "Promote candidate", onClick: () => { this.setState({ canary: 100, rolledBack: false }); this.toast("Candidate promoted", "fraud-detector v14 → 100% production traffic", "oklch(0.62 0.14 152)"); } },
+        { label: "Pause rollout", onClick: () => this.toast("Rollout paused", "Traffic frozen at " + s.canary + "% · GitOps sync suspended", "oklch(0.66 0.15 72)") },
+        { label: "Roll back", onClick: () => { this.setState({ canary: 0, rolledBack: true }); this.toast("Rolled back", "v13 restored to 100% · p95 recovering to 41 ms", "oklch(0.58 0.19 25)"); } },
+        { label: "Scale endpoint", onClick: () => this.toast("Scaling", "min replicas 2 → 4 · 2 pods scheduling", "oklch(0.62 0.16 258)") },
+        { label: "View logs", onClick: this.go("monitoring") },
+      ],
+
+      // ---- monitoring ----
+      alerts,
+      hasAlerts: alerts.length > 0,
+      monCharts: [
+        this.chart("Request rate (rps)", this.seq(40, (i) => 980 + 180 * Math.sin(i / 5)), "1,142", "oklch(0.52 0.15 258)"),
+        this.chart("p95 latency (ms)", this.seq(40, (i) => (s.rolledBack ? 40 + 5 * Math.sin(i / 4) : i > 26 ? 60 + (i - 26) * 6 : 42 + 4 * Math.sin(i / 3))), s.rolledBack ? "41 ms" : "128 ms", s.rolledBack ? "oklch(0.62 0.14 152)" : "oklch(0.58 0.19 25)"),
+        this.chart("Error rate (%)", this.seq(40, (i) => (s.rolledBack ? 0.08 : 0.09 + (i > 30 ? (i - 30) * 0.02 : 0))), s.rolledBack ? "0.08%" : "0.31%", "oklch(0.66 0.15 72)"),
+        this.chart("GPU utilisation (%)", this.seq(40, (i) => 64 + 12 * Math.sin(i / 6)), "71%", "oklch(0.62 0.16 258)"),
+      ],
+      svcMetrics: [
+        { k: "Request rate", v: "1,142 rps" }, { k: "Error rate", v: s.rolledBack ? "0.08%" : "0.31%" },
+        { k: "p50 latency", v: s.rolledBack ? "18 ms" : "22 ms" }, { k: "p95 latency", v: s.rolledBack ? "41 ms" : "128 ms" },
+        { k: "p99 latency", v: s.rolledBack ? "72 ms" : "214 ms" }, { k: "Throughput", v: "1,138 pred/s" },
+        { k: "Queue depth", v: s.rolledBack ? "2" : "31" }, { k: "Active replicas", v: "6" },
+      ],
+      gpuMetrics: [
+        { k: "GPU utilisation", v: "71%" }, { k: "GPU memory", v: "4.9 / 24 GiB" }, { k: "Power", v: "148 W" },
+        { k: "Temperature", v: "67 °C" }, { k: "ECC errors", v: "0" }, { k: "Throttle events", v: "0" },
+      ],
+      llmMetrics: [
+        { k: "Time to first token", v: "182 ms" }, { k: "Inter-token latency", v: "24 ms" },
+        { k: "Input tokens/s", v: "12,400" }, { k: "Output tokens/s", v: "3,180" },
+        { k: "Active sequences", v: "48" }, { k: "Waiting requests", v: "6" }, { k: "KV-cache used", v: "62%" },
+      ],
+      showLlm: P.showLlmMetrics !== false,
+      modelMetrics: [
+        { k: "Live accuracy (proxy)", v: s.rolledBack ? "0.9829" : "0.9741" }, { k: "Prediction positive rate", v: "2.14% (train 1.84%)" },
+        { k: "Feature drift", v: "PSI 0.27 · tenure_months" }, { k: "Concept drift", v: "Detected · 3-day window" },
+        { k: "Invalid input rate", v: "0.42%" }, { k: "Chargeback loss avoided", v: "$318k / 30d" },
+      ],
+      startRetrain: () => { this.setState({ retraining: true, route: "job", job: { name: "fraud-retrain-drift-0731", status: "Running", pct: 6, epoch: 3, elapsed: 140, cost: 2.1, series: this.seq(6, (i) => 0.58 * Math.exp(-i / 7) + 0.05) } }); this.toast("Retraining pipeline started", "Drift-triggered · dataset v38 · 4×A100", "oklch(0.62 0.16 258)"); },
+
+      // ---- cost ----
+      costRows: [
+        { k: "Risk Intelligence", proj: "Fraud Detection Platform", train: "$6,410", inf: "$4,140", idle: "$690", total: "$11,240", budget: "$18,000", w: "62%", tone: "oklch(0.62 0.14 152)" },
+        { k: "Growth ML", proj: "Product Recommendation Engine", train: "$3,120", inf: "$4,410", idle: "$375", total: "$7,905", budget: "$12,000", w: "66%", tone: "oklch(0.62 0.14 152)" },
+        { k: "Lifecycle", proj: "Customer Churn Predictor", train: "$980", inf: "$1,100", idle: "$100", total: "$2,180", budget: "$4,000", w: "55%", tone: "oklch(0.62 0.14 152)" },
+        { k: "Service AI", proj: "Support Assistant LLM", train: "$19,840", inf: "$7,900", idle: "$900", total: "$28,640", budget: "$30,000", w: "95%", tone: "oklch(0.58 0.19 25)" },
+      ],
+      unitCosts: [
+        { k: "Current spend", v: "$49,965" }, { k: "Forecast (month end)", v: "$71,400" },
+        { k: "Idle GPU cost", v: "$2,065" }, { k: "Cost per training run", v: "$38.20 avg" },
+        { k: "Cost per 1k predictions", v: "$0.0041" }, { k: "Cost per 1M tokens", v: "$1.92" },
+      ],
+      recommendations: [
+        { k: "Shut down idle workspace", d: "Dev Patel · 8×H100 idle 48m", save: "$412 / mo", act: () => this.toast("Workspace stopped", "8×H100 workspace released · $412/mo saved", "oklch(0.62 0.14 152)") },
+        { k: "Move interruptible training to spot GPUs", d: "reco-hpo-sweep-14 · checkpointed", save: "$1,180 / mo", act: () => this.toast("Applied", "Sweep moved to spot GPU pool", "oklch(0.62 0.14 152)") },
+        { k: "Reduce minimum endpoint replicas", d: "churn-predictor staging · 3 → 1", save: "$260 / mo", act: () => this.toast("Applied", "Min replicas set to 1", "oklch(0.62 0.14 152)") },
+        { k: "Use quantised model version", d: "support-assistant v4 · FP8 on NIM", save: "$4,300 / mo", act: () => this.toast("Applied", "FP8 engine build queued", "oklch(0.62 0.14 152)") },
+        { k: "Move workload to lower-cost accelerator", d: "fraud-detector-prod A100 → A10G", save: "$740 / mo", act: () => this.toast("Applied", "Endpoint rescheduled on A10G pool", "oklch(0.62 0.14 152)") },
+      ],
+
+      // ---- architecture ----
+      archLayers: [
+        { k: "Developer experience", items: ["Web portal", "CLI", "SDK", "REST API", "Jupyter / VS Code"], bg: "#f2f6ff", bd: "#d8e2f7" },
+        { k: "Platform control plane", items: ["Project controller", "Training controller", "Model release controller", "Endpoint controller", "Identity and RBAC", "Quotas", "Policy enforcement", "Approval workflows", "Audit logging"], bg: "#fff", bd: "#e4e7ec" },
+        { k: "ML workflow layer", items: ["Kubeflow Pipelines", "Kubeflow Trainer", "Kubernetes Jobs", "Kueue", "MLflow"], bg: "#fff", bd: "#e4e7ec" },
+        { k: "Artifact layer", items: ["Object storage", "Container registry", "Dataset registry", "Model registry"], bg: "#fff", bd: "#e4e7ec" },
+        { k: "Serving layer", items: ["KServe", "Triton", "TensorRT", "TensorRT-LLM", "vLLM", "NVIDIA NIM"], bg: "#fff", bd: "#e4e7ec" },
+        { k: "Infrastructure layer", items: ["Kubernetes", "CPU node pools", "GPU node pools", "MIG pools", "NVIDIA GPU Operator"], bg: "#f8f9fb", bd: "#e4e7ec" },
+        { k: "Observability layer", items: ["Prometheus", "Grafana", "DCGM Exporter", "OpenTelemetry", "Logs and traces", "Cost attribution"], bg: "#f8f9fb", bd: "#e4e7ec" },
+      ],
+      archFlows: [
+        { k: "Developer request", d: "Portal / CLI → control plane → namespace, quota, GitOps directory", tone: "oklch(0.52 0.15 258)" },
+        { k: "Training execution", d: "Training controller → Kueue admission → Trainer job on GPU pool", tone: "oklch(0.52 0.15 258)" },
+        { k: "Model artifact flow", d: "Job → object storage → MLflow → model registry (signed)", tone: "oklch(0.62 0.14 152)" },
+        { k: "GitOps deployment", d: "Release controller → Git commit → Argo sync → KServe", tone: "oklch(0.62 0.14 152)" },
+        { k: "Inference traffic", d: "Gateway → KServe → Triton / vLLM replicas on GPU nodes", tone: "oklch(0.66 0.15 72)" },
+        { k: "Metrics and logs", d: "DCGM + OTel → Prometheus → Grafana + cost attribution", tone: "#6b7484" },
+        { k: "Retraining loop", d: "Drift monitor → pipeline trigger → new candidate → approval", tone: "oklch(0.58 0.19 25)" },
+      ],
+
+      // ---- admin ----
+      adminSections: [
+        { k: "Teams and users", d: "4 teams · 38 users · SCIM sync from Okta", v: "Manage" },
+        { k: "Roles and permissions", d: "6 roles · viewer, engineer, approver, admin, auditor, billing", v: "Manage" },
+        { k: "Resource quotas", d: "Per-team GPU, CPU, storage and budget caps", v: "Manage" },
+        { k: "GPU profiles", d: "A100 80GB, A100 40GB, H100, T4, A10G, MIG 1g.10gb", v: "Manage" },
+        { k: "Compute profiles", d: "6 training profiles · 4 inference profiles", v: "Manage" },
+        { k: "Runtime templates", d: "Triton, TensorRT-LLM, vLLM, NIM, custom", v: "Manage" },
+        { k: "Policy rules", d: "12 rules · image signing, data class, max runtime, egress", v: "Manage" },
+        { k: "Approval requirements", d: "Production requires 2 approvers + all gates", v: "Manage" },
+        { k: "Budgets", d: "$73,000 monthly platform cap · alerts at 80%", v: "Manage" },
+        { k: "Cluster health", d: "42 nodes · 2 unhealthy GPUs · 1 node draining", v: "View" },
+      ].map((a) => Object.assign({}, a, { onClick: () => this.toast(a.k, a.v + " view opened · " + a.d, "oklch(0.62 0.16 258)") })),
+      quotaRows: [
+        { k: "Risk Intelligence", gpu: "16 A100", used: "8", cpu: "512 vCPU", store: "8 TiB", budget: "$18,000", w: "50%" },
+        { k: "Growth ML", gpu: "12 A100", used: "6", cpu: "384 vCPU", store: "12 TiB", budget: "$12,000", w: "50%" },
+        { k: "Lifecycle", gpu: "4 A100", used: "1", cpu: "128 vCPU", store: "2 TiB", budget: "$4,000", w: "25%" },
+        { k: "Service AI", gpu: "16 H100", used: "16", cpu: "768 vCPU", store: "40 TiB", budget: "$30,000", w: "100%" },
+      ],
+      pipelines: [
+        { k: "fraud-nightly-retrain", trigger: "Schedule · 02:00 UTC", last: "8h ago", status: "Succeeded", dur: "1h 24m", tone: "oklch(0.62 0.14 152)" },
+        { k: "churn-drift-retrain", trigger: "Drift monitor", last: s.retraining ? "running" : "3h ago", status: s.retraining ? "Running" : "Succeeded", dur: "38m", tone: s.retraining ? "oklch(0.62 0.16 258)" : "oklch(0.62 0.14 152)" },
+        { k: "feature-backfill-v37", trigger: "Manual · Ana Reyes", last: "2h ago", status: "Succeeded", dur: "2h 06m", tone: "oklch(0.62 0.14 152)" },
+        { k: "llm-eval-harness", trigger: "On model registered", last: "1d ago", status: "Failed", dur: "12m", tone: "oklch(0.58 0.19 25)" },
+      ],
+      pipelineSteps: ["Ingest", "Validate", "Feature build", "Train", "Evaluate", "Register", "Gate check", "Deploy staging"].map((k, i) => ({
+        k, tone: i < 6 ? "oklch(0.62 0.14 152)" : i === 6 ? "oklch(0.62 0.16 258)" : "#8b94a3",
+        bg: i < 6 ? "#f0f9f3" : i === 6 ? "#f2f6ff" : "#f6f7f9",
+        state: i < 6 ? "done" : i === 6 ? "running" : "pending",
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>
